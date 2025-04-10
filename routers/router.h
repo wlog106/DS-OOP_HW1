@@ -6,6 +6,8 @@
 
 using namespace std;
 
+void router(Database &db, deque<string>& command);
+
 bool strTo_Completed(string str);
 int strTo_SortCriteria(string str);
 int strTo_ExpireState(string str);

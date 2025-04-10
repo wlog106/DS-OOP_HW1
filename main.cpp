@@ -5,11 +5,12 @@
 #include "task.h"
 #include "./databaseOp/database.h"
 #include "./routers/router.h"
+#include "./validators/validator.h"
 
 using namespace std;
 
+
 deque<string>& decodeBuffer(string buffer);
-bool commandValidator(deque<string>& command);
 
 int main(){
     
@@ -19,33 +20,19 @@ int main(){
         Database TodoList;
         deque<string>& command = decodeBuffer(buffer);
 
-        if(!commandValidator(command)){
+        if(!validator(command)){
             cout << "invalid command\n";
             continue;
         }
 
-        if(command.front() == "add"){
-            command.pop_front();
-            Create(TodoList, command);    
-        }
-        else if(command.front() == "ls"){
-            command.pop_front();
-            Read(TodoList, command);
-        }
-        else if(command.front() == "upt"){
-            command.pop_front();
-            Update(TodoList, command);
-        }
-        else if(command.front() == "rm"){
-            command.pop_front();
-            Delete(TodoList, command);
-        }
-        else if(command.front() == "help"){
+        if(command.front() == "help"){
 
         }
         else if(command.front() == "exit"){
             return 0;
         }
+
+        router(TodoList, command);
 
         buffer = "";
     }
@@ -65,6 +52,3 @@ deque<string>& decodeBuffer(string buffer){
     return tmp;
 }
 
-bool commandValidator(deque<string>& command){
-
-}
