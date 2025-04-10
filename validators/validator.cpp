@@ -12,13 +12,13 @@ bool validator(deque<string>& command){
         return CreateValidator(command);
     }
     else if(command.front() == "ls"){
-        return ReadValidator(command[0], command[1]);
+        return ReadValidator(command[1], command[2]);
     }
     else if(command.front() == "upt"){
         return UpdateValidator(command);
     }
     else if(command.front() == "rm"){
-        return DeleteValidator(command[0], command[1]);
+        return DeleteValidator(command[1], command[2]);
     }
     else if(command.front() == "help" || command.front() == "exit"){
         return true;

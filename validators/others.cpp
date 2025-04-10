@@ -14,7 +14,7 @@ bool flagCheck(string flag, set<string> flagSet){
 
 bool flagCheck(deque<string> &command, set<set<string>> flagSet){
     set<string> flags;
-    for(auto itr = command.begin(); itr != command.end(); itr++){
+    for(auto itr = command.begin()+1; itr != command.end(); itr++){
         if((*itr)[0] == '-') flags.insert(*itr);
     }
     if(flagSet.find(flags) != flagSet.end()) return true;
@@ -76,7 +76,6 @@ bool valueCheck(string flag, string value){
         return false;
     }
 }
-
 
 set<string> 
 

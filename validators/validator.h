@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <set>
@@ -22,5 +24,7 @@ bool UpdateValidator(deque<string> &command);
 bool DeleteValidator(string flag, string value);
 
 
-set<string> ReadFlagSet, DeleteFlagSet;
-set<set<string>> CreateFlagSet, UpdateFlagSet;
+extern set<string> ReadFlagSet, DeleteFlagSet;
+
+
+extern set<set<string>> CreateFlagSet, UpdateFlagSet;

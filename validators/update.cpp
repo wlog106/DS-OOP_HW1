@@ -12,7 +12,7 @@ bool UpdateValidator(deque<string> &command){
     if(!flagCheck(command, UpdateFlagSet)) return false;
 
     string flag, value;
-    for(auto itr = command.begin(); itr - prev(command.end()) < 0; itr++){
+    for(auto itr = command.begin()+1; itr - prev(command.end()) < 0; itr++){
         flag = *itr;
         itr++;
         value = *itr;

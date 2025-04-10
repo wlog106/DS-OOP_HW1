@@ -2,7 +2,7 @@
 
 #include <string>
 #include <deque>
-#include "database.h"
+#include "../database/database.h"
 
 using namespace std;
 
