@@ -9,7 +9,7 @@ void Database::deleteById(int *id){
 
     auto itr = (*db).begin()+*id;
     try{
-        if(itr == (*db).end()) throw logic_error("Id: " + to_string(*id) + " Not Found\n");
+        if(itr == (*db).end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
 
         delete *itr;
         *itr = nullptr;
@@ -25,7 +25,7 @@ void Database::deleteByName(string *name){
 
     auto itr = searchByName(name);
     try{
-        if(itr == (*db).end()) throw logic_error("Name: \"" + *name + "\" Not Found\n");
+        if(itr == (*db).end()) throw logic_error("Name: \"" + *name + "\" Not Found");
 
         delete *itr;
         *itr = nullptr;
@@ -41,7 +41,7 @@ void Database::deleteByCategory(string *category){
 
     auto itrPair = searchByCategory(category);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Category: \"" + *category + "\" not found\n");
+        if(itrPair.first == (*db).end()) throw logic_error("Category: \"" + *category + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
@@ -64,7 +64,7 @@ void Database::deleteByCompleted(bool *completed){
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Completed State: \"" + *state + "\" not found\n");
+        if(itrPair.first == (*db).end()) throw logic_error("Completed State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
@@ -93,7 +93,7 @@ void Database::deleteByExpire(int *expire){
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Expire State: \"" + *state + "\" not found\n");
+        if(itrPair.first == (*db).end()) throw logic_error("Expire State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;

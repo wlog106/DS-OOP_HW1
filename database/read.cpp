@@ -85,7 +85,7 @@ void Database::readByExpire(int *expire){
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Expire State: \"" + *state + "\" not found\n");
+        if(itrPair.first == (*db).end()) throw logic_error("Expire State: \"" + *state + "\" not found");
         for(auto itr = itrPair.first; itr != itrPair.second; itr++){
             cout << "Id: " << itr-(*db).begin() << " " << *(*itr);
         }

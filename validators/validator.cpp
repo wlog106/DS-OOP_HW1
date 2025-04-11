@@ -7,23 +7,36 @@
 
 using namespace std;
 
-bool validator(const deque<string>& command){
-    if(command.front() == "add"){
+bool validator(const deque<string> *command){
+    if(command->front() == "add"){
         return CreateValidator(command);
     }
-    else if(command.front() == "ls"){
-        return ReadValidator(command[1], command[2]);
+    else if(command->front() == "ls"){
+        return ReadValidator(&command->at(1), &command->at(2));
     }
-    else if(command.front() == "upt"){
+    else if(command->front() == "upt"){
         return UpdateValidator(command);
     }
-    else if(command.front() == "rm"){
-        return DeleteValidator(command[1], command[2]);
+    else if(command->front() == "rm"){
+        return DeleteValidator(&command->at(1), &command->at(2));
     }
-    else if(command.front() == "help" || command.front() == "exit"){
+    else if(command->front() == "help"){
+        return true;
+    }
+    else if(command->front() == "exit"){
+        delete CreateFlagSet;
+        delete ReadFlagSet;
+        delete UpdateFlagSet;
+        delete DeleteFlagSet;
+        CreateFlagSet = nullptr;
+        ReadFlagSet = nullptr;
+        UpdateFlagSet = nullptr;
+        DeleteFlagSet = nullptr;
         return true;
     }
     else {
+        cout << "error: Unknown command: \"" << command->front() 
+             << "\"\nNeed help? Type 'help' to see the available commands\n";
         return false;
     }
 }

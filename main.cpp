@@ -10,47 +10,57 @@
 using namespace std;
 
 
-deque<string>& decodeBuffer(string buffer);
+void decodeBuffer(string *buffer, deque<string> *commmand, stringstream *ss);
 
 
 int main(){
     
-    string buffer;
-    Database TodoList;
+    stringstream *ss = new stringstream;
+    deque<string> *command = new deque<string>;
+    string *buffer = new string;
+    Database *TodoList = new Database;
 
-    while (getline(cin, buffer)){
+    while (getline(cin, *buffer)){
 
-        deque<string>& command = decodeBuffer(buffer);
+        decodeBuffer(buffer, command, ss);
 
-        if(!validator(command)){
-            cout << "invalid command\n";
-            continue;
+        if(!validator(command)) continue;
+
+        if((*command).front() == "help"){
+
         }
-
-        if(command.front() == "help"){
-
-        }
-        else if(command.front() == "exit"){
+        else if((*command).front() == "exit"){
+            delete ss;
+            delete command;
+            delete buffer;
+            delete TodoList;
+            ss = nullptr;
+            command = nullptr;
+            buffer = nullptr;
+            TodoList = nullptr;
             return 0;
         }
 
         router(TodoList, command);
 
-        buffer = "";
+        *buffer = "";
+        (*ss).str("");
+        command->clear();
     }
 
 }
 
-deque<string>& decodeBuffer(string buffer){
-    string str;
-    deque<string> *tmp = new deque<string>(0);
-    stringstream ss;
-    ss << buffer;
+void decodeBuffer(string *buffer, deque<string> *command, stringstream *ss){
+
+    string *str = new string;
+    *ss << *buffer;
     
-    while(ss >> str){
-        (*tmp).push_back(str);
+    while(*ss >> *str){
+        command->push_back(*str);
     }
 
-    return *tmp;
+    delete str;
+    str = nullptr;
+
 }
 

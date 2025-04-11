@@ -101,19 +101,23 @@ int Task::getExpire() const{
 
 string Task::showRemainingTime(){
 
-    time_t diff = difftime(*expireTime, time(NULL));
+    time_t *diff = new time_t;
+    *diff = difftime(*expireTime, time(NULL));
 
-    if(diff < 0){
+    if(*diff < 0){
         return "Already Expired!";
     }
 
     int day, hr, min;
-    day = diff/(60*60*24);
-    diff %= (60*60*24);
-    hr = diff/(60*60);
-    diff %= (60*60);
-    min = diff/60;
-    diff %= 60;
+    day = *diff/(60*60*24);
+    *diff %= (60*60*24);
+    hr = *diff/(60*60);
+    *diff %= (60*60);
+    min = *diff/60;
+    *diff %= 60;
+
+    delete diff;
+    diff = nullptr;
 
     return to_string(day) + " days " + to_string(hr) + " hours " + to_string(min) + " minutes";
 }

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Update(Database &db, deque<string> &command){
+void Update(Database *db, deque<string> *command){
     
     int *id = new int;
     string *name = new string;
@@ -14,75 +14,75 @@ void Update(Database &db, deque<string> &command){
     bool *completed = new bool;
 
     // search by id
-    if(command.front() == "-i"){
-        command.pop_front();
-        *id = stoi(command.front());
-        command.pop_front();
-        while(command.size() != 0){
+    if(command->front() == "-i"){
+        command->pop_front();
+        *id = stoi(command->front());
+        command->pop_front();
+        while(command->size() != 0){
 
             // update name
-            if(command.front() == "-n"){
-                command.pop_front();
-                *name = command.front();
-                command.pop_front();
-                db.updateNameById(id, name);
+            if(command->front() == "-n"){
+                command->pop_front();
+                *name = command->front();
+                command->pop_front();
+                db->updateNameById(id, name);
             }
 
             // update category
-            else if(command.front() == "-c"){
-                command.pop_front();
-                *category = command.front();
-                command.pop_front();
-                db.updateCategoryById(id, category);
+            else if(command->front() == "-c"){
+                command->pop_front();
+                *category = command->front();
+                command->pop_front();
+                db->updateCategoryById(id, category);
             }
 
             //update completed
-            else if(command.front() == "-C"){
-                command.pop_front();
-                strTo_Completed(completed, command.front());
-                command.pop_front();
-                db.updateCompletedById(id, completed);
+            else if(command->front() == "-C"){
+                command->pop_front();
+                strTo_Completed(completed, &command->front());
+                command->pop_front();
+                db->updateCompletedById(id, completed);
             }
 
             // update due
-            else if(command.front() == "-d"){
-                command.pop_front();
-                *due = command.front();
-                command.pop_front();
-                db.updateDueById(id, due);
+            else if(command->front() == "-d"){
+                command->pop_front();
+                *due = command->front();
+                command->pop_front();
+                db->updateDueById(id, due);
             }
         }
     }
 
     // search by name
-    else if(command.front() == "-n"){
-        command.pop_front();
-        *name = command.front();
-        command.pop_front();
-        while(command.size() != 0){
+    else if(command->front() == "-n"){
+        command->pop_front();
+        *name = command->front();
+        command->pop_front();
+        while(command->size() != 0){
 
             // update category
-            if(command.front() == "-c"){
-                command.pop_front();
-                *category = command.front();
-                command.pop_front();
-                db.updateCategoryById(id, category);
+            if(command->front() == "-c"){
+                command->pop_front();
+                *category = command->front();
+                command->pop_front();
+                db->updateCategoryById(id, category);
             }
 
             //update completed
-            else if(command.front() == "-C"){
-                command.pop_front();
-                strTo_Completed(completed, command.front());
-                command.pop_front();
-                db.updateCompletedById(id, completed);
+            else if(command->front() == "-C"){
+                command->pop_front();
+                strTo_Completed(completed, &command->front());
+                command->pop_front();
+                db->updateCompletedById(id, completed);
             }
 
             // update due
-            else if(command.front() == "-d"){
-                command.pop_front();
-                *due = command.front();
-                command.pop_front();
-                db.updateDueById(id, due);
+            else if(command->front() == "-d"){
+                command->pop_front();
+                *due = command->front();
+                command->pop_front();
+                db->updateDueById(id, due);
             }
         }
     }

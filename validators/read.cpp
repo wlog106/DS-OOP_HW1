@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool ReadValidator(const string &flag, const string &value){
+bool ReadValidator(const string *flag, const string *value){
     if(!flagCheck(flag, ReadFlagSet)) return false;
     if(!valueCheck(flag, value)) return false;
     return true;
