@@ -6,61 +6,105 @@ using namespace std;
 
 // delete
 void Database::deleteById(int id){
+
     auto itr = (*db).begin()+id;
-    if(itr != (*db).end()){
+    try{
+        if(itr == (*db).end()) throw logic_error("Id: " + to_string(id) + " Not Found\n");
+
         delete *itr;
         *itr = nullptr;
         (*db).erase(itr);
+
+        cout << "Successfully deleted the task with Id: " << id << "\n";
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
         return;
     }
-    cout << "No such task\n";
 }
 void Database::deleteByName(string name){
+
     auto itr = searchByName(name);
-    if(itr != (*db).end()){
+    try{
+        if(itr == (*db).end()) throw logic_error("Name: " + name + " Not Found\n");
+
         delete *itr;
         *itr = nullptr;
         (*db).erase(itr);
+
+        cout << "Successfully deleted the task with Name: " << name << "\n";
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
         return;
     }
-    cout << "No such task\n";
 }
 void Database::deleteByCategory(string category){
+
     auto itrPair = searchByCategory(category);
-    if(itrPair.first != (*db).end()){
+    try{
+        if(itrPair.first == (*db).end()) throw logic_error("Category: " + category + " not found\n");
+
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
         (*db).erase(itrPair.first, itrPair.second);
-        cout << "Successfully delete all the members in " << category << "\n";
+
+        cout << "Successfully deleted all the tasks in " + category + "\n";
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
         return;
     }
-    cout << "Category: " << category << " not found\n";
 }
 void Database::deleteByCompleted(bool completed){
+
+    string state = "Not Completed";
+    if(completed){
+        state = "Completed";
+    }
+
     auto itrPair = searchByCompleted(completed);
-    if(itrPair.first != (*db).end()){
+    try{
+        if(itrPair.first == (*db).end()) throw logic_error("Completed State: " + state + " not found\n");
+
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
         (*db).erase(itrPair.first, itrPair.second);
-        cout << "Successfully delete all the members in " << category << "\n";
-        return;
+
+        cout << "Successfully deleted all the tasks with state " + state + "\n";
     }
-    cout << "Category: " << category << " not found\n";
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n"; 
+    }
 }
 void Database::deleteByExpire(int expire){
+
+    string state = "Not Expired";
+    if(expire == expireState::True){
+        state = "Expired";
+    }
+    else if(expire == expireState::None){
+        state = "Due isn't set";
+    }
+
     auto itrPair = searchByExpire(expire);
-    if(itrPair.first != (*db).end()){
+    try{
+        if(itrPair.first == (*db).end()) throw logic_error("Expire State: " + state + " not found\n");
+
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
         (*db).erase(itrPair.first, itrPair.second);
-        cout << "Successfully delete all the members in " << category << "\n";
+
+        cout << "Successfully deleted all the tasks with state " + state + "\n";
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
         return;
     }
-    cout << "Category: " << category << " not found\n";
 }
