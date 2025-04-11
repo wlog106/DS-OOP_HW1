@@ -7,16 +7,23 @@
 
 using namespace std;
 
-bool CreateValidator(deque<string> &command){
+bool CreateValidator(const deque<string> &command){
     
     if(!flagCheck(command, CreateFlagSet)) return false;
 
-    string flag, value;
+    string *flag = new string;
+    string *value = new string;
     for(auto itr = command.begin()+1; itr - prev(command.end()) < 0; itr++){
-        flag = *itr;
+        *flag = *itr;
         itr++;
-        value = *itr;
-        if(!valueCheck(flag, value)) return false;
+        *value = *itr;
+        if(!valueCheck(*flag, *value)){
+            delete flag;
+            delete value;
+            return false;
+        }
     }
+    delete flag;
+    delete value;
     return true;
 }

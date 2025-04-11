@@ -8,9 +8,9 @@ using namespace std;
 
 void router(Database &db, deque<string>& command);
 
-bool strTo_Completed(string str);
-int strTo_SortCriteria(string str);
-int strTo_ExpireState(string str);
+void strTo_Completed(bool *completed, string &str);
+void strTo_SortCriteria(int *sortCriteria, string &str);
+void strTo_ExpireState(int *expire, string &str);
 
 void Create(Database &db, deque<string> &command);
 void Read(Database &db, deque<string> &command);

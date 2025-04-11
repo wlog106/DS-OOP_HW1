@@ -29,54 +29,54 @@ bool cmpByExpire(const Task *a, const Task *b){
 
 
 // search
-auto Database::searchByName(string name)->vector<Task*>::iterator{
+auto Database::searchByName(string *name)->vector<Task*>::iterator{
     auto itr = (*db).begin();
     for(; itr != (*db).end(); itr++){
-        if((*itr)->getName() == name) break;
+        if((*itr)->getName() == *name) break;
     }
     return itr;
 }
-auto Database::searchByCategory(string category)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
+auto Database::searchByCategory(string *category)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
     sort((*db).begin(), (*db).end(), cmpByCategory);
     auto first = (*db).begin();
     while(first != (*db).end()){
-        if((*first)->getCategory() == category) break;
+        if((*first)->getCategory() == *category) break;
         first++;
     }
     auto second = first;
     while(second != (*db).end()){
-        if((*second)->getCategory() != category) break;
+        if((*second)->getCategory() != *category) break;
         second++;
     }
     return {first, second};
 }
-auto Database::searchByCompleted(bool completed)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
+auto Database::searchByCompleted(bool *completed)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
     sort((*db).begin(), (*db).end(), cmpByCompleted);
     auto first = (*db).begin();
     while(first != (*db).end()){
-        if((*first)->getCompleted() == completed) break;
+        if((*first)->getCompleted() == *completed) break;
         first++;
     }
     auto second = first;
     while(second != (*db).end()){
-        if((*second)->getCompleted() != completed) break;
+        if((*second)->getCompleted() != *completed) break;
         second++;
     }
     return {first, second};
 }
-auto Database::searchByExpire(int expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
+auto Database::searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
     for(auto itr = (*db).begin(); itr != (*db).end(); itr++){
         (*itr)->updateExpireState();
     }
     sort((*db).begin(), (*db).end(), cmpByExpire);
     auto first = (*db).begin();
     while(first != (*db).end()){
-        if((*first)->getExpire() == expire) break;
+        if((*first)->getExpire() == *expire) break;
         first++;
     }
     auto second = first;
     while(second != (*db).end()){
-        if((*second)->getExpire() != expire) break;
+        if((*second)->getExpire() != *expire) break;
         second++;
     }
     return {first, second};

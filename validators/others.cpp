@@ -7,21 +7,25 @@
 
 using namespace std;
 
-bool flagCheck(string flag, set<string> flagSet){
+bool flagCheck(const string &flag, const set<string> &flagSet){
     if(flagSet.find(flag) != flagSet.end()) return true;
     return false;
 }
 
-bool flagCheck(deque<string> &command, set<set<string>> flagSet){
-    set<string> flags;
+bool flagCheck(const deque<string> &command, const set<set<string>> &flagSet){
+    set<string> *flags = new set<string>;
     for(auto itr = command.begin()+1; itr != command.end(); itr++){
-        if((*itr)[0] == '-') flags.insert(*itr);
+        if((*itr)[0] == '-') (*flags).insert(*itr);
     }
-    if(flagSet.find(flags) != flagSet.end()) return true;
+    if(flagSet.find(*flags) != flagSet.end()){
+        delete flags;
+        return true;
+    }
+    delete flags;
     return false;
 }
 
-bool valueCheck(string flag, string value){
+bool valueCheck(const string &flag, const string &value){
 
     // check name and category
     if(flag == "-n" || flag == "-c"){

@@ -10,10 +10,10 @@ Basic_task::Basic_task(){
     this->category = new string;
     this->completed = new bool;
 }
-Basic_task::Basic_task(string name, string category, bool completed){
-    this->name = new string(name);
-    this->category = new string(category);
-    this->completed = new bool(completed);
+Basic_task::Basic_task(string *name, string *category, bool *completed){
+    this->name = name;
+    this->category = category;
+    this->completed = completed;
 }
 Basic_task::~Basic_task(){
     delete name;
@@ -23,14 +23,17 @@ Basic_task::~Basic_task(){
     category = nullptr;
     completed = nullptr;
 }
-void Basic_task::setName(string name){
-    *(this->name) = name;
+void Basic_task::setName(string *name){
+    delete this->name;
+    this->name = name;
 }
-void Basic_task::setCategory(string category){
-    *(this->category) = category;
+void Basic_task::setCategory(string *category){
+    delete this->category;
+    this->category = category;
 }
-void Basic_task::setCompleted(bool completed){
-    *(this->completed) = completed;
+void Basic_task::setCompleted(bool *completed){
+    delete this->completed;
+    this->completed = completed;
 }
 
 string Basic_task::getName() const{
@@ -53,13 +56,13 @@ Task::Task(){
     expireTime = new time_t;
 }
 
-Task::Task(string name, string category, bool completed): 
+Task::Task(string *name, string *category, bool *completed): 
     Basic_task(name, category, completed){
     expire = new int(expireState::None);
     expireTime = new time_t;
 }
 
-Task::Task(string name, string category, string due, bool completed): 
+Task::Task(string *name, string *category, string *due, bool *completed): 
     Basic_task(name, category, completed){
     expire = new int(expireState::None);
     expireTime = new time_t;
@@ -73,16 +76,18 @@ Task::~Task(){
     expireTime = nullptr;
 }
 
-void Task::setDue(string due){
-    tm dueTime = {0};
-    dueTime.tm_year = stoi(due.substr(0, 4))-1900;
-    dueTime.tm_mon = stoi(due.substr(5, 2))-1;
-    dueTime.tm_mday = stoi(due.substr(8, 2));
-    dueTime.tm_hour = stoi(due.substr(11, 2));
-    dueTime.tm_min = stoi(due.substr(14, 2));
-    dueTime.tm_sec = 0;
-    *(this->expireTime) = mktime(&dueTime);
+void Task::setDue(string *due){
+    tm *dueTime = new tm{0};
+    (*dueTime).tm_year = stoi((*due).substr(0, 4))-1900;
+    (*dueTime).tm_mon  = stoi((*due).substr(5, 2))-1;
+    (*dueTime).tm_mday = stoi((*due).substr(8, 2));
+    (*dueTime).tm_hour = stoi((*due).substr(11, 2));
+    (*dueTime).tm_min  = stoi((*due).substr(14, 2));
+    (*dueTime).tm_sec  = 0;
+    *(this->expireTime) = mktime(dueTime);
     *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState::True : expireState::False;
+    delete due;
+    due = nullptr;
 }
 
 void Task::updateExpireState(){
@@ -123,7 +128,7 @@ ostream& operator << (ostream& out, Task &task){
     if(task.getExpire() != expireState::None){
         out << task.showRemainingTime();
     }
-    else out << "Due isn't setted";
+    else out << "Due isn't set";
 
     out << "\n";
 

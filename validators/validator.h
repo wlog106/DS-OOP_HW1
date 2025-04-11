@@ -8,20 +8,20 @@
 
 using namespace std;
 
-bool validator(deque<string>& command);
+bool validator(const deque<string>& command);
 
-bool flagCheck(string flag, set<string> flagSet);
-bool flagCheck(deque<string> &command, set<set<string>> flagSet);
+bool flagCheck(const string &flag, const set<string> &flagSet);
+bool flagCheck(const deque<string> &command, const set<set<string>> &flagSet);
 
-bool valueCheck(string flag, string value);
+bool valueCheck(const string &flag, const string &value);
 
-bool CreateValidator(deque<string> &command);
+bool CreateValidator(const deque<string> &command);
 
-bool ReadValidator(string flag, string value);
+bool ReadValidator(const string &flag, const string &value);
 
-bool UpdateValidator(deque<string> &command);
+bool UpdateValidator(const deque<string> &command);
 
-bool DeleteValidator(string flag, string value);
+bool DeleteValidator(const string &flag, const string &value);
 
 
 extern set<string> ReadFlagSet, DeleteFlagSet;

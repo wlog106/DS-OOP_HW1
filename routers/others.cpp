@@ -5,19 +5,19 @@
 
 using namespace std;
 
-bool strTo_Completed(string str){
-    if(str == "yes") return true;
-    else if(str == "no") return false;
+void strTo_Completed(bool *completed, string &str){
+    if(str == "yes") *completed = true;
+    else if(str == "no") *completed = false;
 }
 
-int strTo_SortCriteria(string str){
-    if(str == "name") return sortCriteria::name;
-    else if(str == "category") return sortCriteria::category;
-    else if(str == "completed") return sortCriteria::completed;
-    else if(str == "expire") return sortCriteria::expire;
+void strTo_SortCriteria(int *sortCritetria, string &str){
+    if(str == "name") *sortCritetria = sortCriteria::name;
+    else if(str == "category") *sortCritetria = sortCriteria::category;
+    else if(str == "completed") *sortCritetria = sortCriteria::completed;
+    else if(str == "expire") *sortCritetria = sortCriteria::expire;
 }
 
-int strTo_ExpireState(string str){
-    if(str == "true") return expireState::True;
-    else if(str == "false") return expireState::False;
+void strTo_ExpireState(int *expire, string &str){
+    if(str == "true") *expire = expireState::True;
+    else if(str == "false") *expire = expireState::False;
 }

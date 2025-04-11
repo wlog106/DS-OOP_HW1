@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool validator(deque<string>& command){
+bool validator(const deque<string>& command){
     if(command.front() == "add"){
         return CreateValidator(command);
     }

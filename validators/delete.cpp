@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool DeleteValidator(string flag, string value){
+bool DeleteValidator(const string &flag, const string &value){
     if(!flagCheck(flag, DeleteFlagSet)) return false;
     if(!valueCheck(flag, value)) return false;
     return true;
