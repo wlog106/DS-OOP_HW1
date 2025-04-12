@@ -11,6 +11,7 @@ void Database::deleteById(int *id){
     try{
         if(itr == db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
 
+        existedName->erase((*itr)->getName());
         delete *itr;
         *itr = nullptr;
         db->erase(itr);
@@ -27,6 +28,7 @@ void Database::deleteByName(string *name){
     try{
         if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
 
+        existedName->erase((*itr)->getName());
         delete *itr;
         *itr = nullptr;
         db->erase(itr);
@@ -44,6 +46,7 @@ void Database::deleteByCategory(string *category){
         if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
+            existedName->erase((*itr)->getName());
             delete *itr;
             *itr = nullptr;
         }
@@ -67,6 +70,7 @@ void Database::deleteByCompleted(bool *completed){
         if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
+            existedName->erase((*itr)->getName());
             delete *itr;
             *itr = nullptr;
         }

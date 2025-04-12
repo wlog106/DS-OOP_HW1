@@ -59,11 +59,16 @@ bool valueCheck(const string *flag, const string *value){
 
     // check all
     else if(*flag == "-a"){
-        if(*value == "name" || *value == "category" 
-            || *value == "completed" || *value == "expire" ){
+        try{
+            if(*value != "name" && *value != "category" && *value != "completed" && *value != "expire"){
+                throw invalid_argument("invalid sort criteria");
+            }
             return true;
         }
-        return false;
+        catch(exception &error){
+            cout << "error: " << error.what() << "\n";
+            return false;
+        }
     }
 
     // check id
@@ -81,33 +86,57 @@ bool valueCheck(const string *flag, const string *value){
     // check due
     else if(*flag == "-d"){
         try{
-
-        }
-        catch(exception &error){
-            
-        }
-        if(value->length() == 19){
+            if(value->at(4) != '-' || value->at(7) != '-' || value->at(10) != '@' 
+               || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
+                throw "invalid format: \"" + *value + "\" \nType \"help\" to see correct format";
+            }
+            stoi(value->substr(0, 4));
+            stoi(value->substr(5, 2));
+            stoi(value->substr(8, 2));
+            stoi(value->substr(11, 2));
+            stoi(value->substr(14, 2));
+            stoi(value->substr(17, 2));
             return true;
         }
-        return false;
+        catch(const char* error){
+            cout << "error: " << error << "\n";
+            return false;
+        }
+        catch(exception &error){
+            cout << "error: fail to convert " << *value << " to proper format\n";
+            return false;
+        }
     }
 
     // check complete
     else if(*flag == "-C"){
-        if(*value == "yes" || *value == "no"){
+        try{
+            if(*value != "yes" && *value != "no"){
+                throw invalid_argument("invalid completed state");
+            }
             return true;
         }
-        return false;
+        catch(exception &error){
+            cout << "error: " << error.what() << "\n";
+            return false;
+        }
     }
 
     // check expire
     else if(*flag == "-e"){
-        if(*value == "true" || *value == "false"){
+        try{
+            if(*value != "true" && *value != "false"){
+                throw invalid_argument("invalid completed state");
+            }
             return true;
         }
-        return false;
+        catch(exception &error){
+            cout << "error: " << error.what() << "\n";
+            return false;
+        }
     }
 
+    // because of flag check, program shouldn't reach this line
     return false;
 }
 

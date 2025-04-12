@@ -8,7 +8,7 @@ using namespace std;
 void Database::createWithoutDue(string *name, string *category, bool *completed){
     try{
         if(existedName->find(*name) != existedName->end()){
-            throw invalid_argument("Name: \"" + *name + "\" conflict\nTask name should be unique");
+            throw invalid_argument("Name: \"" + *name + "\" conflict, task name should be unique");
         }
         Task *task = new Task(name, category, completed);
         db->push_back(task);
