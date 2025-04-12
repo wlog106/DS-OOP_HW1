@@ -6,26 +6,68 @@ using namespace std;
 
 // update
 void Database::updateNameById(int *id, string *name){
-    (*((*db).begin()+*id))->setName(name);
+    try{
+        if(db->begin()+*id >= db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        (*(db->begin()+*id))->setName(name);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateCategoryById(int *id, string *categoery){
-    (*((*db).begin()+*id))->setCategory(categoery);
+    try{
+        if(db->begin()+*id >= db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        (*(db->begin()+*id))->setCategory(categoery);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateCompletedById(int *id, bool *completed){
-    (*((*db).begin()+*id))->setCompleted(completed);
+    try{
+        if(db->begin()+*id >= db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        (*(db->begin()+*id))->setCompleted(completed);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateDueById(int *id, string *due){
-    (*((*db).begin()+*id))->setDue(due);
+    try{
+        if(db->begin()+*id >= db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        (*(db->begin()+*id))->setDue(due);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateCategoryByName(string *name, string *category){
     auto itr = searchByName(name);
-    (*itr)->setCategory(category);
+    try{
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        (*itr)->setCategory(category);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateCompletedByName(string *name, bool *completed){
     auto itr = searchByName(name);
-    (*itr)->setCompleted(completed);
+    try{
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        (*itr)->setCompleted(completed);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
 void Database::updateDueByName(string *name, string *due){
     auto itr = searchByName(name);
-    (*itr)->setDue(due);
+    try{
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        (*itr)->setDue(due);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
 }
