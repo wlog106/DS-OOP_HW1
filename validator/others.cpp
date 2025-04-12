@@ -10,7 +10,7 @@ using namespace std;
 bool flagCheck(const string *flag, const set<string> *flagSet){
     try{
         if(flagSet->find(*flag) == flagSet->end()){
-            throw new invalid_argument("invalid flags");
+            throw invalid_argument("invalid flag");
         }
         return true;
     }
@@ -23,11 +23,11 @@ bool flagCheck(const string *flag, const set<string> *flagSet){
 bool flagCheck(const deque<string> *command, const set<set<string>> *flagSet){
     set<string> *flags = new set<string>;
     for(auto itr = command->begin()+1; itr != command->end(); itr++){
-        if((*itr)[0] == '-') (*flags).insert(*itr);
+        if((*itr)[0] == '-') flags->insert(*itr);
     }
     try{
         if(flagSet->find(*flags) == flagSet->end()){
-            throw new invalid_argument("invalid flags");
+            throw invalid_argument("invalid flags");
         }
         delete flags;
         flags = nullptr;
@@ -47,7 +47,7 @@ bool valueCheck(const string *flag, const string *value){
     if(*flag == "-n" || *flag == "-c"){
         try{
             if(value->length() > 20 || value->length() ==0 ){
-                throw new invalid_argument("Length should be between 1 and 20");
+                throw invalid_argument("Length should be between 1 and 20");
             }
             return true;
         }

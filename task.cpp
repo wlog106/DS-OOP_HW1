@@ -83,7 +83,7 @@ void Task::setDue(string *due){
     dueTime->tm_mday = stoi(due->substr(8, 2));
     dueTime->tm_hour = stoi(due->substr(11, 2));
     dueTime->tm_min  = stoi(due->substr(14, 2));
-    dueTime->tm_sec  = 0;
+    dueTime->tm_sec  = stoi(due->substr(17, 2));
     *(this->expireTime) = mktime(dueTime);
     *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
     delete due;
@@ -99,27 +99,37 @@ int Task::getExpire() const{
     return *expire;
 }
 
-string Task::showRemainingTime(){
+void Task::showRemainingTime(){
 
     time_t *diff = new time_t;
     *diff = difftime(*expireTime, time(NULL));
 
     if(*diff < 0){
-        return "Already Expired!";
+        cout <<  "Already Expired!\n";
+        return;
     }
 
-    int day, hr, min;
-    day = *diff/(60*60*24);
+
+    int *day = new int(*diff/(60*60*24));
     *diff %= (60*60*24);
-    hr = *diff/(60*60);
+    int *hr = new int(*diff/(60*60));
     *diff %= (60*60);
-    min = *diff/60;
+    int *min = new int(*diff/60);
     *diff %= 60;
 
-    delete diff;
-    diff = nullptr;
+    cout << to_string(*day) << " days " 
+         << to_string(*hr) << " hours " 
+         << to_string(*min) << " minutes " 
+         << to_string(*diff) << " seconds\n";
 
-    return to_string(day) + " days " + to_string(hr) + " hours " + to_string(min) + " minutes";
+    delete diff;
+    delete day;
+    delete hr;
+    delete min;
+    diff = nullptr;
+    day = nullptr;
+    hr = nullptr;
+    min = nullptr;
 }
 
 ostream& operator << (ostream& out, Task &task){
@@ -130,11 +140,9 @@ ostream& operator << (ostream& out, Task &task){
         << "Time Remainig: ";
     
     if(task.getExpire() != expireState_None){
-        out << task.showRemainingTime();
+        task.showRemainingTime();
     }
-    else out << "Due isn't set";
-
-    out << "\n";
+    else out << "Due isn't set\n";
 
     return out;
 }

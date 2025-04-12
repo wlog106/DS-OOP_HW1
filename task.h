@@ -39,7 +39,7 @@ public:
     void setDue(string *due);
     void updateExpireState();
     int getExpire() const;
-    string showRemainingTime();
+    void showRemainingTime();
 private:
     int *expire;
     time_t *expireTime;

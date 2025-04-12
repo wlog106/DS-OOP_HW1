@@ -26,6 +26,9 @@ int main(){
         decodeBuffer(buffer, command, ss, str);
 
         if(!validator(command)){
+            *buffer = "";
+            *str = "";
+            ss->clear();
             command->clear();
             continue;
         }
@@ -51,7 +54,7 @@ int main(){
 
         *buffer = "";
         *str = "";
-        (*ss).clear();
+        ss->clear();
         command->clear();
     }
 

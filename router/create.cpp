@@ -7,7 +7,7 @@ using namespace std;
 
 void Create(Database *db, deque<string> *command){
 
-    bool *completed = new bool;
+    bool *completed = new bool(false);
     string *name = new string; 
     string *category = new string;
     string *due = new string("null");
@@ -39,6 +39,8 @@ void Create(Database *db, deque<string> *command){
     // routing it to right function
     if(*due == "null"){
         db->createWithoutDue(name, category, completed);
+        delete due;
+        due = nullptr;
     }
     else{
         db->createWithDue(name, category, due, completed);
