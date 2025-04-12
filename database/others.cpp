@@ -6,10 +6,18 @@
 using namespace std;
 
 //construcotr
-Database::Database(){ db = new vector<Task*>(0); }
+Database::Database(){
+    db = new vector<Task*>(0);
+    existedName = new set<string>;
+}
 
 //destructor
-Database::~Database(){ delete db; }
+Database::~Database(){
+    delete db; 
+    delete existedName;
+    db = nullptr;
+    existedName = nullptr;
+}
 
 
 // cmp for sort

@@ -78,12 +78,12 @@ Task::~Task(){
 
 void Task::setDue(string *due){
     tm *dueTime = new tm{0};
-    (*dueTime).tm_year = stoi((*due).substr(0, 4))-1900;
-    (*dueTime).tm_mon  = stoi((*due).substr(5, 2))-1;
-    (*dueTime).tm_mday = stoi((*due).substr(8, 2));
-    (*dueTime).tm_hour = stoi((*due).substr(11, 2));
-    (*dueTime).tm_min  = stoi((*due).substr(14, 2));
-    (*dueTime).tm_sec  = 0;
+    dueTime->tm_year = stoi(due->substr(0, 4))-1900;
+    dueTime->tm_mon  = stoi(due->substr(5, 2))-1;
+    dueTime->tm_mday = stoi(due->substr(8, 2));
+    dueTime->tm_hour = stoi(due->substr(11, 2));
+    dueTime->tm_min  = stoi(due->substr(14, 2));
+    dueTime->tm_sec  = 0;
     *(this->expireTime) = mktime(dueTime);
     *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState::True : expireState::False;
     delete due;

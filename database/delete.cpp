@@ -7,13 +7,13 @@ using namespace std;
 // delete
 void Database::deleteById(int *id){
 
-    auto itr = (*db).begin()+*id;
+    auto itr = db->begin()+*id;
     try{
-        if(itr == (*db).end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        if(itr == db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
 
         delete *itr;
         *itr = nullptr;
-        (*db).erase(itr);
+        db->erase(itr);
 
         cout << "Successfully deleted the task with Id: \"" << id << "\"\n";
     }
@@ -25,11 +25,11 @@ void Database::deleteByName(string *name){
 
     auto itr = searchByName(name);
     try{
-        if(itr == (*db).end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
 
         delete *itr;
         *itr = nullptr;
-        (*db).erase(itr);
+        db->erase(itr);
 
         cout << "Successfully deleted the task with Name: \"" << *name << "\"\n";
     }
@@ -41,13 +41,13 @@ void Database::deleteByCategory(string *category){
 
     auto itrPair = searchByCategory(category);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Category: \"" + *category + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
-        (*db).erase(itrPair.first, itrPair.second);
+        db->erase(itrPair.first, itrPair.second);
 
         cout << "Successfully deleted all the tasks in \"" + *category + "\"\n";
     }
@@ -64,13 +64,13 @@ void Database::deleteByCompleted(bool *completed){
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Completed State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
-        (*db).erase(itrPair.first, itrPair.second);
+        db->erase(itrPair.first, itrPair.second);
 
         cout << "Successfully deleted all the tasks with state \"" + *state + "\"\n";
     }
@@ -93,13 +93,13 @@ void Database::deleteByExpire(int *expire){
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == (*db).end()) throw logic_error("Expire State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Expire State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
             *itr = nullptr;
         }
-        (*db).erase(itrPair.first, itrPair.second);
+        db->erase(itrPair.first, itrPair.second);
 
         cout << "Successfully deleted all the tasks with state \"" + *state + "\"\n";
     }

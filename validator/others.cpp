@@ -80,6 +80,12 @@ bool valueCheck(const string *flag, const string *value){
 
     // check due
     else if(*flag == "-d"){
+        try{
+
+        }
+        catch(exception &error){
+            
+        }
         if(value->length() == 19){
             return true;
         }
@@ -144,5 +150,3 @@ set<string> *DeleteFlagSet
         "-C",
         "-e"
     };
-
-set<string> *existedName = new set<string>;

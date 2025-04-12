@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 #include "../task.h"
 
 using namespace std;
@@ -61,4 +62,5 @@ public:
 
 private:
     vector<Task*> *db;
+    set<string> *existedName;
 };

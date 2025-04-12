@@ -27,5 +27,3 @@ bool DeleteValidator(const string *flag, const string *value);
 extern set<string> *ReadFlagSet, *DeleteFlagSet;
 
 extern set<set<string>> *CreateFlagSet, *UpdateFlagSet;
-
-extern set<string> *existedName;
