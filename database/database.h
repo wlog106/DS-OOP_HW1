@@ -5,9 +5,12 @@
 #include <set>
 #include "../task.h"
 
-using namespace std;
+#define sortCriteria_Name 0
+#define sortCriteria_Category 1
+#define sortCriteria_Completed 2
+#define sortCriteria_Expire 3
 
-enum sortCriteria {name, category, completed, expire};
+using namespace std;
 
 // cmp for sort
 bool cmpByName(const Task *a, const Task *b);

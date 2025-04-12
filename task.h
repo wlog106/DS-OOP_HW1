@@ -3,9 +3,11 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
+#define expireState_None 4
+#define expireState_True 5
+#define expireState_False 6
 
-enum expireState {None, True, False};
+using namespace std;
 
 class Basic_task{
 public:

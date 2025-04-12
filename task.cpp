@@ -52,19 +52,19 @@ string Basic_task::showCompletedState() const{
 
 //Task
 Task::Task(){
-    expire = new int(expireState::None);
+    expire = new int(expireState_None);
     expireTime = new time_t;
 }
 
 Task::Task(string *name, string *category, bool *completed): 
     Basic_task(name, category, completed){
-    expire = new int(expireState::None);
+    expire = new int(expireState_None);
     expireTime = new time_t;
 }
 
 Task::Task(string *name, string *category, string *due, bool *completed): 
     Basic_task(name, category, completed){
-    expire = new int(expireState::None);
+    expire = new int(expireState_None);
     expireTime = new time_t;
     setDue(due);
 }
@@ -85,14 +85,14 @@ void Task::setDue(string *due){
     dueTime->tm_min  = stoi(due->substr(14, 2));
     dueTime->tm_sec  = 0;
     *(this->expireTime) = mktime(dueTime);
-    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState::True : expireState::False;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
     delete due;
     due = nullptr;
 }
 
 void Task::updateExpireState(){
-    if(*expire == expireState::None) return;
-    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState::True : expireState::False;
+    if(*expire == expireState_None) return;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
 }
 
 int Task::getExpire() const{
@@ -129,7 +129,7 @@ ostream& operator << (ostream& out, Task &task){
         << "CompletedState: " << task.showCompletedState() << " "
         << "Time Remainig: ";
     
-    if(task.getExpire() != expireState::None){
+    if(task.getExpire() != expireState_None){
         out << task.showRemainingTime();
     }
     else out << "Due isn't set";

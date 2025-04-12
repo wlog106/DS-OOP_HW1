@@ -84,10 +84,10 @@ void Database::deleteByCompleted(bool *completed){
 void Database::deleteByExpire(int *expire){
 
     string *state = new string("Not Expired");
-    if(*expire == expireState::True){
+    if(*expire == expireState_True){
         *state = "Expired";
     }
-    else if(*expire == expireState::None){
+    else if(*expire == expireState_None){
         *state = "Due isn't set";
     }
 

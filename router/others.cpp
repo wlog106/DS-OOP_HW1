@@ -11,13 +11,13 @@ void strTo_Completed(bool *completed, string *str){
 }
 
 void strTo_SortCriteria(int *sortCritetria, string *str){
-    if(*str == "name") *sortCritetria = sortCriteria::name;
-    else if(*str == "category") *sortCritetria = sortCriteria::category;
-    else if(*str == "completed") *sortCritetria = sortCriteria::completed;
-    else if(*str == "expire") *sortCritetria = sortCriteria::expire;
+    if(*str == "name") *sortCritetria = sortCriteria_Name;
+    else if(*str == "category") *sortCritetria = sortCriteria_Category;
+    else if(*str == "completed") *sortCritetria = sortCriteria_Completed;
+    else if(*str == "expire") *sortCritetria = sortCriteria_Expire;
 }
 
 void strTo_ExpireState(int *expire, string *str){
-    if(*str == "true") *expire = expireState::True;
-    else if(*str == "false") *expire = expireState::False;
+    if(*str == "true") *expire = expireState_True;
+    else if(*str == "false") *expire = expireState_False;
 }
