@@ -37,8 +37,10 @@ public:
     ~Task();
 
     void setDue(string *due);
+    void setDue(time_t *t);
     void updateExpireState();
     int getExpire() const;
+    time_t getExpireTime() const;
     void showRemainingTime();
 private:
     int *expire;

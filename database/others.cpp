@@ -2,6 +2,8 @@
 #include "../task.h"
 #include <string>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -13,6 +15,10 @@ Database::Database(){
 
 //destructor
 Database::~Database(){
+    for(auto itr = db->begin(); itr != db->end(); itr++){
+        delete *itr;
+        *itr = nullptr;
+    }
     delete db; 
     delete existedName;
     db = nullptr;
@@ -90,4 +96,58 @@ auto Database::searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector
     return {first, second};
 }
 
-void Database::writeToFile(){}
+void Database::saveToFile(string *file){
+
+    ofstream *out = new ofstream(*file);
+    for(auto itr = db->begin(); itr != db->end(); itr++){
+        *out << (*itr)->getName() << " " 
+             << (*itr)->getCategory() << " "
+             << (*itr)->getCompleted() << " ";
+             if((*itr)->getExpire() == expireState_None){
+                *out << 0 << "\n";
+             }
+             else{
+                *out << (*itr)->getExpireTime() << "\n";
+             }
+    }
+    out->close();
+    delete out;
+    out = nullptr;
+}
+
+void Database::loadFromFile(string *file){
+
+    string *buffer = new string;
+    stringstream *ss = new stringstream;
+    ifstream *in = new ifstream(*file);
+
+    while(getline(*in, *buffer)){
+        *ss << *buffer;
+
+        string *name = new string;
+        string *category = new string;
+        bool *completed = new bool;
+        time_t *t = new time_t;
+
+        *ss >> *name >> *category >> *completed >> *t;
+        Task *task = new Task(name, category, completed);
+        if(*t == 0){
+            delete t;
+            t = nullptr;
+        }
+        else {
+            task->setDue(t);
+        }
+        db->push_back(task);
+        existedName->insert(*name);
+        ss->clear();
+        *buffer = "";
+    }
+    
+    delete buffer;
+    delete ss;
+    delete in;
+    buffer = nullptr;
+    ss = nullptr;
+    in = nullptr;   
+}

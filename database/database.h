@@ -42,6 +42,7 @@ public:
     void updateCategoryById(int *id, string *category);
     void updateCompletedById(int *id, bool *completed);
     void updateDueById(int *id, string *due);
+    void updateNameByName(string *name, string *name_);
     void updateCategoryByName(string *name, string *category);
     void updateCompletedByName(string *name, bool *completed);
     void updateDueByName(string *name, string *due);
@@ -61,7 +62,8 @@ public:
     auto searchByCompleted(bool *completed)->pair<vector<Task*>::iterator, vector<Task*>::iterator>;
     auto searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>;
     
-    void writeToFile();
+    void saveToFile(string *file);
+    void loadFromFile(string *file);
 
 private:
     vector<Task*> *db;

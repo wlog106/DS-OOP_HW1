@@ -41,6 +41,16 @@ void Database::updateDueById(int *id, string *due){
         cout << "error: " << error.what() << "\n";
     }
 }
+void Database::updateNameByName(string *name, string *name_){
+    auto itr = searchByName(name);
+    try{
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        (*itr)->setName(name_);
+    }
+    catch(exception &error){
+        cout << "error: " << error.what() << "\n";
+    }
+}
 void Database::updateCategoryByName(string *name, string *category){
     auto itr = searchByName(name);
     try{

@@ -6,24 +6,18 @@
 using namespace std;
 
 void Update(Database *db, deque<string> *command){
-    
-    int *id = new int;
-    string *name = new string;
-    string *category = new string;
-    string *due = new string;
-    bool *completed = new bool;
 
     // search by id
     if(command->front() == "-i"){
         command->pop_front();
-        *id = stoi(command->front());
+        int *id = new int(stoi(command->front()));
         command->pop_front();
         while(command->size() != 0){
 
             // update name
             if(command->front() == "-n"){
                 command->pop_front();
-                *name = command->front();
+                string *name = new string(command->front());
                 command->pop_front();
                 db->updateNameById(id, name);
             }
@@ -31,7 +25,7 @@ void Update(Database *db, deque<string> *command){
             // update category
             else if(command->front() == "-c"){
                 command->pop_front();
-                *category = command->front();
+                string *category = new string(command->front());
                 command->pop_front();
                 db->updateCategoryById(id, category);
             }
@@ -39,6 +33,7 @@ void Update(Database *db, deque<string> *command){
             //update completed
             else if(command->front() == "-C"){
                 command->pop_front();
+                bool *completed = new bool;
                 strTo_Completed(completed, &command->front());
                 command->pop_front();
                 db->updateCompletedById(id, completed);
@@ -47,46 +42,56 @@ void Update(Database *db, deque<string> *command){
             // update due
             else if(command->front() == "-d"){
                 command->pop_front();
-                *due = command->front();
+                string *due = new string(command->front());
                 command->pop_front();
                 db->updateDueById(id, due);
             }
         }
+        delete id;
+        id = nullptr;
     }
 
     // search by name
     else if(command->front() == "-n"){
         command->pop_front();
-        *name = command->front();
+        string *name = new string(command->front());
         command->pop_front();
         while(command->size() != 0){
 
+            // update name
+            if(command->front() == "-n"){
+                command->pop_front();
+                string *name_ = new string(command->front());
+                command->pop_front();
+                db->updateNameByName(name, name_);
+            }
+
             // update category
-            if(command->front() == "-c"){
+            else if(command->front() == "-c"){
                 command->pop_front();
-                *category = command->front();
+                string *category = new string(command->front());
                 command->pop_front();
-                db->updateCategoryById(id, category);
+                db->updateCategoryByName(name, category);
             }
 
             //update completed
             else if(command->front() == "-C"){
                 command->pop_front();
+                bool *completed = new bool;
                 strTo_Completed(completed, &command->front());
                 command->pop_front();
-                db->updateCompletedById(id, completed);
+                db->updateCompletedByName(name, completed);
             }
 
             // update due
             else if(command->front() == "-d"){
                 command->pop_front();
-                *due = command->front();
+                string *due = new string(command->front());
                 command->pop_front();
-                db->updateDueById(id, due);
+                db->updateDueByName(name, due);
             }
         }
+        delete name;
+        name = nullptr;
     }
-
-    delete id;
-    id = nullptr;
 }

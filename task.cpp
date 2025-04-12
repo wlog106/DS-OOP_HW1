@@ -90,9 +90,18 @@ void Task::setDue(string *due){
     due = nullptr;
 }
 
+void Task::setDue(time_t *t){
+    expireTime = t;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
+}
+
 void Task::updateExpireState(){
     if(*expire == expireState_None) return;
     *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
+}
+
+time_t Task::getExpireTime() const{
+    return *expireTime;
 }
 
 int Task::getExpire() const{

@@ -23,7 +23,7 @@ void Database::readAll(int *sortCriteria){
 }
 void Database::readById(int *id){
     try{
-        if((db->begin()+*id) >= db->end()) throw logic_error("Id: \"" + to_string(*id) + "\" not found\n");
+        if((db->begin()+*id) >= db->end()) throw logic_error("Id: \"" + to_string(*id) + "\" not found");
         cout << "Id: " << *id << " " << *(*(db->begin()+*id));
     }
     catch(exception &error){
@@ -33,7 +33,7 @@ void Database::readById(int *id){
 void Database::readByName(string *name){
     auto itr = searchByName(name);
     try{
-        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" not found\n");
+        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" not found");
         cout << "Id: " << itr-db->begin() << " " << *(*itr);
     }
     catch(exception &error){
@@ -43,7 +43,7 @@ void Database::readByName(string *name){
 void Database::readByCategory(string *category){
     auto itrPair = searchByCategory(category);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found\n");
+        if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
         for(auto itr = itrPair.first; itr != itrPair.second; itr++){
             cout << "Id: " << itr-db->begin() << " " << *(*itr);
         }
@@ -61,7 +61,7 @@ void Database::readByCompleted(bool *completed){
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found\n");
+        if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
         for(auto itr = itrPair.first; itr != itrPair.second; itr++){
             cout << "Id: " << itr-db->begin() << " " << *(*itr);
         }

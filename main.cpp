@@ -21,6 +21,11 @@ int main(){
     string *buffer = new string;
     Database *TodoList = new Database;
 
+    string *file = new string("disk.txt");
+    TodoList->loadFromFile(file);
+
+    cout << "──> ";
+
     while (getline(cin, *buffer)){
 
         decodeBuffer(buffer, command, ss, str);
@@ -30,6 +35,7 @@ int main(){
             *str = "";
             ss->clear();
             command->clear();
+            cout << "──> ";
             continue;
         }
 
@@ -37,16 +43,22 @@ int main(){
 
         }
         else if((*command).front() == "exit"){
+
+            TodoList->saveToFile(file);
+            
+            delete file;
             delete ss;
             delete str;
             delete command;
             delete buffer;
             delete TodoList;
+            file = nullptr;
             ss = nullptr;
             str = nullptr;
             command = nullptr;
             buffer = nullptr;
             TodoList = nullptr;
+            
             return 0;
         }
 
@@ -56,8 +68,9 @@ int main(){
         *str = "";
         ss->clear();
         command->clear();
-    }
 
+        cout << "──> ";
+    }
 }
 
 void decodeBuffer(string *buffer, deque<string> *command, stringstream *ss, string *str){

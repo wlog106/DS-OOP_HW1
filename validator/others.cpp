@@ -90,6 +90,7 @@ bool valueCheck(const string *flag, const string *value){
                || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
                 throw "invalid format: \"" + *value + "\" \nType \"help\" to see correct format";
             }
+            // should add 0 <= hr < 24 etc
             stoi(value->substr(0, 4));
             stoi(value->substr(5, 2));
             stoi(value->substr(8, 2));
@@ -98,7 +99,7 @@ bool valueCheck(const string *flag, const string *value){
             stoi(value->substr(17, 2));
             return true;
         }
-        catch(const char* error){
+        catch(const string &error){
             cout << "error: " << error << "\n";
             return false;
         }
