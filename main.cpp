@@ -6,6 +6,7 @@
 #include "./database/database.h"
 #include "./router/router.h"
 #include "./validator/validator.h"
+#include "inputBuffer.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ int main(){
     stringstream *ss = new stringstream;
     deque<string> *command = new deque<string>;
     string *buffer = new string;
+    deque<string> *History = new deque<string>;
     Database *TodoList = new Database;
 
     string *file = new string("disk.txt");
@@ -26,7 +28,11 @@ int main(){
 
     cout << "──> ";
 
-    while (getline(cin, *buffer)){
+    while (getInput(buffer, History)){
+
+        cout << "\r";
+
+        History->push_back(*buffer);
 
         decodeBuffer(buffer, command, ss, str);
 
@@ -39,19 +45,21 @@ int main(){
             continue;
         }
 
-        if((*command).front() == "help"){
+        if(command->front() == "help"){
 
         }
-        else if((*command).front() == "exit"){
+        else if(command->front() == "exit"){
 
             TodoList->saveToFile(file);
             
+            delete History;
             delete file;
             delete ss;
             delete str;
             delete command;
             delete buffer;
             delete TodoList;
+            History = nullptr;
             file = nullptr;
             ss = nullptr;
             str = nullptr;
@@ -61,9 +69,14 @@ int main(){
             
             return 0;
         }
+        else if(command->size() == 0){
+            continue;
+        }
+        else {
+            router(TodoList, command);
+        }
 
-        router(TodoList, command);
-
+    
         *buffer = "";
         *str = "";
         ss->clear();

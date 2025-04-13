@@ -7,8 +7,8 @@
 
 using namespace std;
 
-bool ReadValidator(const string *flag, const string *value){
-    if(!flagCheck(flag, ReadFlagSet)) return false;
-    if(!valueCheck(flag, value)) return false;
+bool ReadValidator(const deque<string> *command){
+    if(!flagCheck(command, ReadFlagSet)) return false;
+    if(!valueCheck(&command->at(1), &command->at(2))) return false;
     return true;
 }

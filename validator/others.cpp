@@ -7,10 +7,10 @@
 
 using namespace std;
 
-bool flagCheck(const string *flag, const set<string> *flagSet){
+bool flagCheck(const deque<string> *command, const set<string> *flagSet){
     try{
-        if(flagSet->find(*flag) == flagSet->end()){
-            throw invalid_argument("invalid flag");
+        if(command->size() == 1 || (flagSet->find(command->at(1)) == flagSet->end())){
+            throw invalid_argument("invalid flags");
         }
         return true;
     }

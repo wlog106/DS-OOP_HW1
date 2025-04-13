@@ -12,13 +12,13 @@ bool validator(const deque<string> *command){
         return CreateValidator(command);
     }
     else if(command->front() == "ls"){
-        return ReadValidator(&command->at(1), &command->at(2));
+        return ReadValidator(command);
     }
     else if(command->front() == "upt"){
         return UpdateValidator(command);
     }
     else if(command->front() == "rm"){
-        return DeleteValidator(&command->at(1), &command->at(2));
+        return DeleteValidator(command);
     }
     else if(command->front() == "help"){
         return true;
@@ -32,6 +32,9 @@ bool validator(const deque<string> *command){
         ReadFlagSet = nullptr;
         UpdateFlagSet = nullptr;
         DeleteFlagSet = nullptr;
+        return true;
+    }
+    else if(command->size() == 0){
         return true;
     }
     else {

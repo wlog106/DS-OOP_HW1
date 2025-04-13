@@ -7,8 +7,8 @@
 
 using namespace std;
 
-bool DeleteValidator(const string *flag, const string *value){
-    if(!flagCheck(flag, DeleteFlagSet)) return false;
-    if(!valueCheck(flag, value)) return false;
+bool DeleteValidator(const deque<string> *command){
+    if(!flagCheck(command, DeleteFlagSet)) return false;
+    if(!valueCheck(&command->at(1), &command->at(2))) return false;
     return true;
 }
