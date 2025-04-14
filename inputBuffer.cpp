@@ -58,9 +58,72 @@ bool getInput(string *buffer, deque<string> *History){
     vector<char> *Buffer = new vector<char>;
     auto BufferItr = Buffer->end();
     auto HistoryItr = History->end();
-    while(_kbhit()){
-        
+    while(true){
+        if(_kbhit()){
+            *ch = _getch();
+            // arrow key
+            if(*ch == 224){
+                *ch = _getch();
+                // Key Up
+                if(*ch == 72){
+                    if(HistoryItr != History->begin()){
+                        PrevCommand(Buffer, --HistoryItr);
+                        BufferItr = Buffer->end();
+                    }
+                }
+                // Key Down
+                else if(*ch == 80){
+                    if(HistoryItr != History->end()){
+                        NextCommand(Buffer, ++HistoryItr);
+                        BufferItr = Buffer->end();
+                    }
+                }
+                // Key Right
+                else if(*ch == 77){
+                    if(BufferItr != Buffer->end()){
+                        BufferItr++;
+                    }
+                }
+                // Key Left
+                else if(*ch == 75){
+                    if(BufferItr != next(Buffer->begin())){
+                        BufferItr--;
+                    }
+                }
+            }
+            // backspace
+            else if(*ch == 8){
+                if(Buffer->size() != 0){
+                    BufferItr--;
+                    Buffer->erase(BufferItr);
+                }
+            }
+            // enter
+            else if(*ch == 13){
+                render(Buffer, Buffer->end());
+                cout << "\b \b\n";
+                break;
+            }
+            // block some wired input
+            else if(*ch >= 33 && *ch <= 126){
+                BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
+                BufferItr++;
+            }
+            render(Buffer, BufferItr);
+
+        }
     }
+    for(auto itr = Buffer->begin(); itr != Buffer->end(); itr++){
+        *buffer += *itr;
+    }
+    delete Buffer;
+    delete ch;
+    delete lastRenderSize;
+    Buffer = nullptr;
+    ch = nullptr;
+    lastRenderSize = nullptr;
+
+    return true;
 
 #else // UNIX
 
@@ -74,6 +137,7 @@ bool getInput(string *buffer, deque<string> *History){
          if(*ch == 27){
             *ch = getchar();
             *ch = getchar();
+            // arrow key
             if(*ch == 65){
                 // Key Up
                 if(HistoryItr != History->begin()){
