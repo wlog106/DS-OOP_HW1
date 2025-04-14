@@ -4,7 +4,7 @@
 
 #ifdef _WIN32
     #include <conio.h>
-#else
+#else // UNIX
     #include <unistd.h>
     #include <termios.h>
     #include <fcntl.h>
@@ -54,8 +54,16 @@ void render(const vector<char> *Buffer, const vector<char>::iterator BufferItr){
 
 bool getInput(string *buffer, deque<string> *History){
 #ifdef _WIN32
+    int *ch = new int;
+    vector<char> *Buffer = new vector<char>;
+    auto BufferItr = Buffer->end();
+    auto HistoryItr = History->end();
+    while(_kbhit()){
+        
+    }
 
-#else
+#else // UNIX
+
     int *ch = new int;
     int *lastRenderSize = new int(50);
     vector<char> *Buffer = new vector<char>;
@@ -67,39 +75,48 @@ bool getInput(string *buffer, deque<string> *History){
             *ch = getchar();
             *ch = getchar();
             if(*ch == 65){
+                // Key Up
                 if(HistoryItr != History->begin()){
                     PrevCommand(Buffer, --HistoryItr);
                     BufferItr = Buffer->end();
                 }
             }
             else if(*ch == 66){
+                // Key Down
                 if(HistoryItr != History->end()){
                     NextCommand(Buffer, ++HistoryItr);
                     BufferItr = Buffer->end();
                 }
             }
+            // Key Right
             else if(*ch == 67){
                 if(BufferItr != Buffer->end()){
                     BufferItr++;
                 }
             }
+            // Key Left
             else if(*ch == 68){
-                if(BufferItr != Buffer->begin()){
+                if(BufferItr != next(Buffer->begin())){
                     BufferItr--;
                 }
             }
         }
+        // backspace
         else if(*ch == 127){
             if(Buffer->size() != 0){
                 BufferItr--;
                 Buffer->erase(BufferItr);
             }
         }
+        // enter
         else if(*ch == 13){
-            cout << "\b\b  \b\b\n";
+            render(Buffer, Buffer->end());
+            cout << "\b \b\n";
             break;
         }
-        else {
+
+        // block invalid input (something like ctl+c won't render but it was inserted)
+        else if(*ch >= 33 && *ch <= 126) {
             BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
             BufferItr++;
         }
