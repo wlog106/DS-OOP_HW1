@@ -23,6 +23,8 @@ bool UpdateValidator(const deque<string> *command);
 
 bool DeleteValidator(const deque<string> *command);
 
+bool isValidDay(const int *year, const int *mon, const int *day);
+bool isLeapYear(const int *year);
 
 extern set<string> *ReadFlagSet, *DeleteFlagSet;
 

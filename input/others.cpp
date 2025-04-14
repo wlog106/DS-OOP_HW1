@@ -2,6 +2,12 @@
 #include <vector>
 #include <deque>
 
+#ifdef _WIN32
+    #define symbol ">>> "
+#else
+    #define symbol "──> "
+#endif
+
 using namespace std;
 
 void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
@@ -17,13 +23,11 @@ void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
 void render(const vector<char> *Buffer, const vector<char>::iterator BufferItr){
     int *i = new int;
     cout << "\r";
-    for(*i = 0; *i < 50; (*i)++){
+    for(*i = 0; *i < 75; (*i)++){
         cout << " ";
     }
-    for(*i = 0; *i < 50; (*i)++){
-        cout << "\b";
-    }
-    cout << "──> ";
+    cout << "\r";
+    cout << symbol;
     delete i;
     i = nullptr;
     if(BufferItr == Buffer->begin()) cout << "|";

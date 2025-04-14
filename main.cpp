@@ -8,6 +8,13 @@
 #include "./validator/validator.h"
 #include "./input/input.h"
 
+#ifdef _WIN32
+    #define symbol ">>> |"
+#else
+    #define symbol "──> |"
+#endif
+
+
 using namespace std;
 
 
@@ -26,7 +33,7 @@ int main(){
     string *file = new string("disk.txt");
     TodoList->loadFromFile(file);
 
-    cout << "──> |";
+    cout << symbol;
 
     while (getInput(buffer, History)){
 
@@ -41,7 +48,7 @@ int main(){
             *str = "";
             ss->clear();
             command->clear();
-            cout << "──> |";
+            cout << symbol;
             continue;
         }
 
@@ -82,7 +89,7 @@ int main(){
         ss->clear();
         command->clear();
 
-        cout << "──> |";
+        cout << symbol;
     }
 }
 

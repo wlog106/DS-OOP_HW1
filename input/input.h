@@ -2,14 +2,6 @@
 #include <vector>
 #include <deque>
 
-#ifdef _WIN32
-    #include <conio.h>
-#else
-    #include <unistd.h>
-    #include <termios.h>
-    #include <fcntl.h>
-#endif
-
 using namespace std;
 
 void unixCommandLine(string *buffer, deque<string> *History);

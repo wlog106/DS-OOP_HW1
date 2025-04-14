@@ -16,7 +16,7 @@ void Database::deleteById(int *id){
         *itr = nullptr;
         db->erase(itr);
 
-        cout << "Successfully deleted the task with Id: \"" << id << "\"\n";
+        cout << "Successfully deleted the task with Id: \"" << *id << "\"\n";
     }
     catch(exception &error){
         cout << "error: " << error.what() << "\n";
