@@ -13,17 +13,7 @@
 
 using namespace std;
 
-void PrevCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
-    Buffer->clear();
-    int *i = new int;
-    for(*i = 0; *i < HistoryItr->length(); (*i)++){
-        Buffer->push_back(HistoryItr->at(*i));
-    }
-    delete i;
-    i = nullptr;
-}
-
-void NextCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
+void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
     Buffer->clear();
     int *i = new int;
     for(*i = 0; *i < HistoryItr->length(); (*i)++){
@@ -62,21 +52,21 @@ bool getInput(string *buffer, deque<string> *History){
     while(true){
         if(_kbhit()){
             *ch = _getch();
-            //cout << "you press: " << *ch << "\n";
+            
             // arrow key
             if(*ch == 224){
                 *ch = _getch();
                 // Key Up
                 if(*ch == 72){
                     if(HistoryItr != History->begin()){
-                        PrevCommand(Buffer, --HistoryItr);
+                        setCommand(Buffer, --HistoryItr);
                         BufferItr = Buffer->end();
                     }
                 }
                 // Key Down
                 else if(*ch == 80){
                     if(HistoryItr != History->end()){
-                        NextCommand(Buffer, ++HistoryItr);
+                        setCommand(Buffer, ++HistoryItr);
                         BufferItr = Buffer->end();
                     }
                 }
@@ -88,14 +78,14 @@ bool getInput(string *buffer, deque<string> *History){
                 }
                 // Key Left
                 else if(*ch == 75){
-                    if(BufferItr != next(Buffer->begin())){
+                    if(BufferItr != Buffer->begin()){
                         BufferItr--;
                     }
                 }
             }
             // backspace
             else if(*ch == 8){
-                if(Buffer->size() != 0){
+                if(BufferItr != Buffer->begin()){
                     BufferItr--;
                     Buffer->erase(BufferItr);
                 }
@@ -130,7 +120,7 @@ bool getInput(string *buffer, deque<string> *History){
     int *ch = new int;
     int *lastRenderSize = new int(50);
     vector<char> *Buffer = new vector<char>;
-    auto BufferItr = Buffer->begin();
+    auto BufferItr = Buffer->end();
     auto HistoryItr = History->end();
     system("/bin/stty raw");
     while(*ch = getchar()){
@@ -141,14 +131,14 @@ bool getInput(string *buffer, deque<string> *History){
             if(*ch == 65){
                 // Key Up
                 if(HistoryItr != History->begin()){
-                    PrevCommand(Buffer, --HistoryItr);
+                    setCommand(Buffer, --HistoryItr);
                     BufferItr = Buffer->end();
                 }
             }
             else if(*ch == 66){
                 // Key Down
                 if(HistoryItr != History->end()){
-                    NextCommand(Buffer, ++HistoryItr);
+                    setCommand(Buffer, ++HistoryItr);
                     BufferItr = Buffer->end();
                 }
             }
@@ -167,7 +157,6 @@ bool getInput(string *buffer, deque<string> *History){
         }
         // backspace
         else if(*ch == 127){
-            //printf("%p\n%p\n", BufferItr, Buffer->begin());
             if(BufferItr != Buffer->begin()){
                 BufferItr--;
                 Buffer->erase(BufferItr);
