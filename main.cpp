@@ -26,7 +26,7 @@ int main(){
     string *file = new string("disk.txt");
     TodoList->loadFromFile(file);
 
-    cout << "──> ";
+    cout << "──> |";
 
     while (getInput(buffer, History)){
 
@@ -41,7 +41,7 @@ int main(){
             *str = "";
             ss->clear();
             command->clear();
-            cout << "──> ";
+            cout << "──> |";
             continue;
         }
 
@@ -82,7 +82,7 @@ int main(){
         ss->clear();
         command->clear();
 
-        cout << "──> ";
+        cout << "──> |";
     }
 }
 

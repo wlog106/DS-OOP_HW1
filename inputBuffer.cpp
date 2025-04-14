@@ -45,6 +45,7 @@ void render(const vector<char> *Buffer, const vector<char>::iterator BufferItr){
     cout << "──> ";
     delete i;
     i = nullptr;
+    if(BufferItr == Buffer->begin()) cout << "|";
     for(auto itr = Buffer->begin(); itr != Buffer->end(); itr++){
         cout << *itr;
         if(itr+1 == BufferItr) cout << "|";
@@ -61,6 +62,7 @@ bool getInput(string *buffer, deque<string> *History){
     while(true){
         if(_kbhit()){
             *ch = _getch();
+            //cout << "you press: " << *ch << "\n";
             // arrow key
             if(*ch == 224){
                 *ch = _getch();
@@ -105,7 +107,7 @@ bool getInput(string *buffer, deque<string> *History){
                 break;
             }
             // block some wired input
-            else if(*ch >= 33 && *ch <= 126){
+            else if(*ch >= 32 && *ch <= 126){
                 BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
                 BufferItr++;
             }
@@ -118,10 +120,8 @@ bool getInput(string *buffer, deque<string> *History){
     }
     delete Buffer;
     delete ch;
-    delete lastRenderSize;
     Buffer = nullptr;
     ch = nullptr;
-    lastRenderSize = nullptr;
 
     return true;
 
@@ -130,7 +130,7 @@ bool getInput(string *buffer, deque<string> *History){
     int *ch = new int;
     int *lastRenderSize = new int(50);
     vector<char> *Buffer = new vector<char>;
-    auto BufferItr = Buffer->end();
+    auto BufferItr = Buffer->begin();
     auto HistoryItr = History->end();
     system("/bin/stty raw");
     while(*ch = getchar()){
@@ -160,14 +160,15 @@ bool getInput(string *buffer, deque<string> *History){
             }
             // Key Left
             else if(*ch == 68){
-                if(BufferItr != next(Buffer->begin())){
+                if(BufferItr != Buffer->begin()){
                     BufferItr--;
                 }
             }
         }
         // backspace
         else if(*ch == 127){
-            if(Buffer->size() != 0){
+            //printf("%p\n%p\n", BufferItr, Buffer->begin());
+            if(BufferItr != Buffer->begin()){
                 BufferItr--;
                 Buffer->erase(BufferItr);
             }
@@ -180,7 +181,7 @@ bool getInput(string *buffer, deque<string> *History){
         }
 
         // block invalid input (something like ctl+c won't render but it was inserted)
-        else if(*ch >= 33 && *ch <= 126) {
+        else if(*ch >= 32 && *ch <= 126) {
             BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
             BufferItr++;
         }
