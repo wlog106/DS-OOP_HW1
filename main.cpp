@@ -6,7 +6,7 @@
 #include "./database/database.h"
 #include "./router/router.h"
 #include "./validator/validator.h"
-#include "inputBuffer.h"
+#include "./input/input.h"
 
 using namespace std;
 
