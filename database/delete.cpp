@@ -16,7 +16,10 @@ void Database::deleteById(int *id){
         *itr = nullptr;
         db->erase(itr);
 
-        readAll(sortCriteria_Name);
+        int *tmp = new int(sortCriteria_Name);
+        readAll(tmp);
+        delete tmp;
+        tmp = nullptr;
     }
     catch(exception &error){
         cout << error.what() << "\n";
@@ -33,7 +36,10 @@ void Database::deleteByName(string *name){
         *itr = nullptr;
         db->erase(itr);
 
-        readAll(sortCriteria_Name);
+        int *tmp = new int(sortCriteria_Name);
+        readAll(tmp);
+        delete tmp;
+        tmp = nullptr;
     }
     catch(exception &error){
         cout << error.what() << "\n";
@@ -52,7 +58,10 @@ void Database::deleteByCategory(string *category){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        readAll(sortCriteria_Name);
+        int *tmp = new int(sortCriteria_Name);
+        readAll(tmp);
+        delete tmp;
+        tmp = nullptr;
     }
     catch(exception &error){
         cout << error.what() << "\n";
@@ -76,7 +85,10 @@ void Database::deleteByCompleted(bool *completed){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        readAll(sortCriteria_Name);
+        int *tmp = new int(sortCriteria_Name);
+        readAll(tmp);
+        delete tmp;
+        tmp = nullptr;
     }
     catch(exception &error){
         cout << error.what() << "\n"; 
@@ -105,7 +117,10 @@ void Database::deleteByExpire(int *expire){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        readAll(sortCriteria_Name);
+        int *tmp = new int(sortCriteria_Name);
+        readAll(tmp);
+        delete tmp;
+        tmp = nullptr;
     }
     catch(exception &error){
         cout << error.what() << "\n";
