@@ -14,22 +14,22 @@ void Create(Database *db, deque<string> *command){
 
     // decode command
     while(command->size() != 0){
-        if(command->front() == "-d"){
+        if(command->front() == "-d" || command->front() == "--due"){
             command->pop_front();
             *due = command->front();
             command->pop_front();
         }
-        else if(command->front() == "-n"){
+        else if(command->front() == "-n" || command->front() == "--name"){
             command->pop_front();
             *name = command->front();
             command->pop_front();
         }
-        else if(command->front() == "-c"){
+        else if(command->front() == "-c" || command->front() == "--category"){
             command->pop_front();
             *category = command->front();
             command->pop_front();
         }
-        else if(command->front() == "-C"){
+        else if(command->front() == "-C" || command->front() == "--completed"){
             command->pop_front();
             strTo_Completed(completed, &command->front());
             command->pop_front();

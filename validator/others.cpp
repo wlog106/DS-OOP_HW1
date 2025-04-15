@@ -44,7 +44,7 @@ bool flagCheck(const deque<string> *command, const set<set<string>> *flagSet){
 bool valueCheck(const string *flag, const string *value){
 
     // check name and category
-    if(*flag == "-n" || *flag == "-c"){
+    if(*flag == "-n" || *flag == "-c" || *flag == "--name" || *flag == "--category"){
         try{
             if(value->length() > 15 || value->length() == 0){
                 throw invalid_argument("Length should be between 1 and 15");
@@ -58,7 +58,7 @@ bool valueCheck(const string *flag, const string *value){
     }
 
     // check all
-    else if(*flag == "-a"){
+    else if(*flag == "-a" || *flag == "--all"){
         try{
             if(*value != "name" && *value != "category" && *value != "completed" && *value != "expire"){
                 throw invalid_argument("invalid sort criteria");
@@ -72,7 +72,7 @@ bool valueCheck(const string *flag, const string *value){
     }
 
     // check id
-    else if(*flag == "-i"){
+    else if(*flag == "-i" || *flag == "--id"){
         try{
             int *i = new int;
             for(*i = 0; *i < value->length(); (*i)++){
@@ -93,7 +93,7 @@ bool valueCheck(const string *flag, const string *value){
     }
 
     // check due
-    else if(*flag == "-d"){
+    else if(*flag == "-d" || *flag == "--due"){
         try{
             if(value->at(4) != '-' || value->at(7) != '-' || value->at(10) != '@' 
                || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
@@ -151,7 +151,7 @@ bool valueCheck(const string *flag, const string *value){
     }
 
     // check complete
-    else if(*flag == "-C"){
+    else if(*flag == "-C" || *flag == "--completed"){
         try{
             if(*value != "yes" && *value != "no"){
                 throw invalid_argument("invalid completed state");
@@ -165,10 +165,10 @@ bool valueCheck(const string *flag, const string *value){
     }
 
     // check expire
-    else if(*flag == "-e"){
+    else if(*flag == "-e" || *flag == "--expire"){
         try{
             if(*value != "true" && *value != "false"){
-                throw invalid_argument("invalid completed state");
+                throw invalid_argument("invalid expire state");
             }
             return true;
         }
@@ -228,39 +228,84 @@ bool isLeapYear(const int *year){
 
 set<set<string>> *CreateFlagSet
     = new set<set<string>>{
-        {"-n", "-c"},
-        {"-n", "-c", "-C"},
-        {"-n", "-c", "-d"},
-        {"-n", "-c", "-d", "-C"}
+        {"-n", "-c"}, {"--name", "--category"},
+        {"--name", "-c"}, {"-n", "--category"},
+
+        {"-n", "-c", "-C"}, {"--name", "--category", "--completed"},
+        {"--name", "-c", "-C"}, {"-n", "--category", "--completed"},
+        {"-n", "--category", "-C"}, {"--name", "-c", "--completed"},
+        {"-n", "-c", "--completed"}, {"--name", "--category", "-C"},
+        {"--name", "--category", "-C"}, {"-n", "-c", "--completed"},
+        {"--name", "-c", "--completed"}, {"-n", "--category", "-C"},
+        {"-n", "--category", "--completed"}, {"--name", "-c", "-C"},
+
+        {"-n", "-c", "-d"}, {"--name", "--category", "--due"},
+        {"--name", "-c", "-d"}, {"-n", "--category", "--due"},
+        {"-n", "--category", "-d"}, {"--name", "-c", "--due"},
+        {"-n", "-c", "--due"}, {"--name", "--category", "-d"},
+        {"--name", "--category", "-d"}, {"-n", "-c", "--due"},
+        {"--name", "-c", "--due"}, {"-n", "--category", "-d"},
+        {"-n", "--category", "--due"}, {"--name", "-c", "-d"},
+
+        {"-n", "-c", "-d", "-C"}, {"--name", "--category", "--due", "--completed"},
+        {"--name", "-c", "-d", "-C"}, {"-n", "--category", "--due", "--completed"},
+        {"-n", "--category", "-d", "-C"}, {"--name", "-c", "--due", "--completed"},
+        {"-n", "-c", "--due", "-C"}, {"--name", "--category", "-d", "--completed"},
+        {"-n", "-c", "-d", "--completed"}, {"--name", "--category", "--due", "-C"},
+        {"--name", "--category", "-d", "-C"}, {"-n", "-c", "--due", "--completed"},
+        {"--name", "-c", "--due", "-C"}, {"-n", "--category", "-d", "--completed"},
+        {"--name", "-c", "-d", "--completed"}, {"-n", "--category", "--due", "-C"},
+        {"-n", "--category", "--due", "-C"}, {"--name", "-c", "-d", "--completed"},
+        {"-n", "--category", "-d", "--completed"}, {"--name", "-c", "--due", "-C"},
+        {"-n", "-c", "--due", "--completed"}, {"--name", "--category", "-d", "-C"},
+        {"--name", "--category", "--due", "-C"}, {"-n", "-c", "-d", "--completed"},
+        {"--name", "--category", "-d", "--completed"}, {"-n", "-c", "--due", "-C"},
+        {"--name", "-c", "--due", "--completed"}, {"-n", "--category", "-d", "-C"},
+        {"-n", "--category", "--due", "--completed"}, {"--name", "-c", "-d", "-C"}
     };
 
 set<string> *ReadFlagSet 
     = new set<string>{
-        "-a",
-        "-i",
-        "-n",
-        "-c",
-        "-C",
-        "-e"
+        "-a", "--all",
+        "-i", "--id",
+        "-n", "--name",
+        "-c", "--category",
+        "-C", "--completed",
+        "-e", "--expire"
     };
 
 set<set<string>> *UpdateFlagSet
     = new set<set<string>>{
-        {"-i", "-n"},
-        {"-i", "-c"},
-        {"-i", "-C"},
-        {"-i", "-d"},
+        {"-i", "-n"}, {"--id", "--name"},
+        {"--id", "-n"}, {"-i", "--name"},
 
-        {"-n", "-c"},
-        {"-n", "-C"},
-        {"-n", "-d"}
+        {"-i", "-c"}, {"--id", "--category"}, 
+        {"--id", "-c"}, {"-i", "--category"},
+
+        {"-i", "-C"}, {"--id", "--completed"},
+        {"--id", "-C"}, {"-i", "--completed"},
+
+        {"-i", "-d"}, {"--id", "--due"},
+        {"--id", "-d"}, {"-i", "--due"},
+
+        {"-n", "-n"}, {"--name", "--name"},
+        {"--name", "-n"}, {"-n", "--name"},
+
+        {"-n", "-c"}, {"--name", "--category"},
+        {"--name", "-c"}, {"-n", "--category"},
+
+        {"-n", "-C"}, {"--name", "--completed"},
+        {"--name", "-C"}, {"-n", "--completed"},
+        
+        {"-n", "-d"}, {"--name", "--due"},
+        {"--name", "-d"}, {"-n", "--due"}
     };
 
 set<string> *DeleteFlagSet
     = new set<string>{
-        "-i",
-        "-n",
-        "-c",
-        "-C",
-        "-e"
+        "-i", "--id",
+        "-n", "--name",
+        "-c", "--category",
+        "-C", "--completed",
+        "-e", "--expire"
     };

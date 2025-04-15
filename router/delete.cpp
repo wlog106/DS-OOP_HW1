@@ -16,7 +16,7 @@ void Delete(Database *db, deque<string> *command){
     while(command->size() != 0){
 
         // delete a task, search by id
-        if(command->front() == "-i"){
+        if(command->front() == "-i" || command->front() == "--id"){
             command->pop_front();
             *id = stoi(command->front());
             command->pop_front();
@@ -24,7 +24,7 @@ void Delete(Database *db, deque<string> *command){
         }
 
         // delete a task, search by name
-        else if(command->front() == "-n"){
+        else if(command->front() == "-n" ||  command->front() == "--name"){
             command->pop_front();
             *name = command->front();
             command->pop_front();
@@ -32,7 +32,7 @@ void Delete(Database *db, deque<string> *command){
         }
 
         // delete some tasks, search by category
-        else if(command->front() == "-c"){
+        else if(command->front() == "-c" || command->front() == "--category"){
             command->pop_front();
             *category = command->front();
             command->pop_front();
@@ -40,7 +40,7 @@ void Delete(Database *db, deque<string> *command){
         }
 
         // delete some tasks, search by completed
-        else if(command->front() == "-C"){
+        else if(command->front() == "-C" || command->front() == "--completed"){
             command->pop_front();
             strTo_Completed(completed, &command->front());
             command->pop_front();
@@ -48,7 +48,7 @@ void Delete(Database *db, deque<string> *command){
         }
 
         // list a part, search by expire
-        else if(command->front() == "-e"){
+        else if(command->front() == "-e" || command->front() == "--expire"){
             command->pop_front();
             strTo_ExpireState(expire, &command->front());
             command->pop_front();

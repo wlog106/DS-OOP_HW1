@@ -9,41 +9,41 @@ void Database::deleteById(int *id){
 
     auto itr = db->begin()+*id;
     try{
-        if(itr == db->end()) throw logic_error("Id: " + to_string(*id) + " Not Found");
+        if(itr == db->end()) throw logic_error("Task with Id: " + to_string(*id) + " Not Found");
 
         existedName->erase((*itr)->getName());
         delete *itr;
         *itr = nullptr;
         db->erase(itr);
 
-        cout << "Successfully deleted the task with Id: \"" << *id << "\"\n";
+        readAll(sortCriteria_Name);
     }
     catch(exception &error){
-        cout << "error: " << error.what() << "\n";
+        cout << error.what() << "\n";
     }
 }
 void Database::deleteByName(string *name){
 
     auto itr = searchByName(name);
     try{
-        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" Not Found");
+        if(itr == db->end()) throw logic_error("Task with Name: \"" + *name + "\" Not Found");
 
         existedName->erase((*itr)->getName());
         delete *itr;
         *itr = nullptr;
         db->erase(itr);
 
-        cout << "Successfully deleted the task with Name: \"" << *name << "\"\n";
+        readAll(sortCriteria_Name);
     }
     catch(exception &error){
-        cout << "error: " << error.what() << "\n";
+        cout << error.what() << "\n";
     }
 }
 void Database::deleteByCategory(string *category){
 
     auto itrPair = searchByCategory(category);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Category: \"" + *category + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             existedName->erase((*itr)->getName());
@@ -52,10 +52,10 @@ void Database::deleteByCategory(string *category){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        cout << "Successfully deleted all the tasks in \"" + *category + "\"\n";
+        readAll(sortCriteria_Name);
     }
     catch(exception &error){
-        cout << "error: " << error.what() << "\n";
+        cout << error.what() << "\n";
     }
 }
 void Database::deleteByCompleted(bool *completed){
@@ -67,7 +67,7 @@ void Database::deleteByCompleted(bool *completed){
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Completed State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             existedName->erase((*itr)->getName());
@@ -76,10 +76,10 @@ void Database::deleteByCompleted(bool *completed){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        cout << "Successfully deleted all the tasks with state \"" + *state + "\"\n";
+        readAll(sortCriteria_Name);
     }
     catch(exception &error){
-        cout << "error: " << error.what() << "\n"; 
+        cout << error.what() << "\n"; 
     }
 
     delete state;
@@ -97,7 +97,7 @@ void Database::deleteByExpire(int *expire){
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Expire State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Expire State: \"" + *state + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
@@ -105,10 +105,10 @@ void Database::deleteByExpire(int *expire){
         }
         db->erase(itrPair.first, itrPair.second);
 
-        cout << "Successfully deleted all the tasks with state \"" + *state + "\"\n";
+        readAll(sortCriteria_Name);
     }
     catch(exception &error){
-        cout << "error: " << error.what() << "\n";
+        cout << error.what() << "\n";
     }
 
     delete state;

@@ -8,14 +8,14 @@ using namespace std;
 void Update(Database *db, deque<string> *command){
 
     // search by id
-    if(command->front() == "-i"){
+    if(command->front() == "-i" || command->front() == "--id"){
         command->pop_front();
         int *id = new int(stoi(command->front()));
         command->pop_front();
         while(command->size() != 0){
 
             // update name
-            if(command->front() == "-n"){
+            if(command->front() == "-n" || command->front() == "--name"){
                 command->pop_front();
                 string *name = new string(command->front());
                 command->pop_front();
@@ -23,7 +23,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             // update category
-            else if(command->front() == "-c"){
+            else if(command->front() == "-c" || command->front() == "--category"){
                 command->pop_front();
                 string *category = new string(command->front());
                 command->pop_front();
@@ -31,7 +31,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             //update completed
-            else if(command->front() == "-C"){
+            else if(command->front() == "-C" || command->front() == "--completed"){
                 command->pop_front();
                 bool *completed = new bool;
                 strTo_Completed(completed, &command->front());
@@ -40,7 +40,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             // update due
-            else if(command->front() == "-d"){
+            else if(command->front() == "-d" || command->front() == "--due"){
                 command->pop_front();
                 string *due = new string(command->front());
                 command->pop_front();
@@ -52,14 +52,14 @@ void Update(Database *db, deque<string> *command){
     }
 
     // search by name
-    else if(command->front() == "-n"){
+    else if(command->front() == "-n" || command->front() == "--name"){
         command->pop_front();
         string *name = new string(command->front());
         command->pop_front();
         while(command->size() != 0){
 
             // update name
-            if(command->front() == "-n"){
+            if(command->front() == "-n" || command->front() == "--name"){
                 command->pop_front();
                 string *name_ = new string(command->front());
                 command->pop_front();
@@ -67,7 +67,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             // update category
-            else if(command->front() == "-c"){
+            else if(command->front() == "-c" || command->front() == "--category"){
                 command->pop_front();
                 string *category = new string(command->front());
                 command->pop_front();
@@ -75,7 +75,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             //update completed
-            else if(command->front() == "-C"){
+            else if(command->front() == "-C" || command->front() == "--completed"){
                 command->pop_front();
                 bool *completed = new bool;
                 strTo_Completed(completed, &command->front());
@@ -84,7 +84,7 @@ void Update(Database *db, deque<string> *command){
             }
 
             // update due
-            else if(command->front() == "-d"){
+            else if(command->front() == "-d" || command->front() == "--due"){
                 command->pop_front();
                 string *due = new string(command->front());
                 command->pop_front();
