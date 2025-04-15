@@ -143,12 +143,23 @@ void Task::showRemainingTime(){
 }
 
 void Task::showTask(){
+
+    string *str = new string;
+    if(this->getCompleted()){
+        *str = "yes";
+    }
+    else {
+        *str = "no";
+    }
     cout << setw(18) << this->getName()
          << setw(18) << this->getCategory()
-         << setw(15) << this->getCompleted();
+         << setw(15) << *str;
     
     if(this->getExpire() != expireState_None){
         this->showRemainingTime();
     }
     else cout << setw(35) << "Due isn't set ";
+
+    delete str;
+    str = nullptr;
 }

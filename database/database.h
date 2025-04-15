@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <set>
-#include "../task.h"
+#include "../task/task.h"
 
 #define sortCriteria_Name 0
 #define sortCriteria_Category 1

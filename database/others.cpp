@@ -1,5 +1,5 @@
 #include "../database/database.h"
-#include "../task.h"
+#include "../task/task.h"
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -47,52 +47,52 @@ bool cmpByExpire(const Task *a, const Task *b){
 
 // search
 auto Database::searchByName(string *name)->vector<Task*>::iterator{
-    auto itr = (*db).begin();
-    for(; itr != (*db).end(); itr++){
+    auto itr = db->begin();
+    for(; itr != db->end(); itr++){
         if((*itr)->getName() == *name) break;
     }
     return itr;
 }
 auto Database::searchByCategory(string *category)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
-    sort((*db).begin(), (*db).end(), cmpByCategory);
-    auto first = (*db).begin();
-    while(first != (*db).end()){
+    sort(db->begin(), db->end(), cmpByCategory);
+    auto first = db->begin();
+    while(first != db->end()){
         if((*first)->getCategory() == *category) break;
         first++;
     }
     auto second = first;
-    while(second != (*db).end()){
+    while(second != db->end()){
         if((*second)->getCategory() != *category) break;
         second++;
     }
     return {first, second};
 }
 auto Database::searchByCompleted(bool *completed)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
-    sort((*db).begin(), (*db).end(), cmpByCompleted);
-    auto first = (*db).begin();
-    while(first != (*db).end()){
+    sort(db->begin(), db->end(), cmpByCompleted);
+    auto first = db->begin();
+    while(first != db->end()){
         if((*first)->getCompleted() == *completed) break;
         first++;
     }
     auto second = first;
-    while(second != (*db).end()){
+    while(second != db->end()){
         if((*second)->getCompleted() != *completed) break;
         second++;
     }
     return {first, second};
 }
 auto Database::searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
-    for(auto itr = (*db).begin(); itr != (*db).end(); itr++){
+    for(auto itr = db->begin(); itr != db->end(); itr++){
         (*itr)->updateExpireState();
     }
-    sort((*db).begin(), (*db).end(), cmpByExpire);
-    auto first = (*db).begin();
-    while(first != (*db).end()){
+    sort(db->begin(), db->end(), cmpByExpire);
+    auto first = db->begin();
+    while(first != db->end()){
         if((*first)->getExpire() == *expire) break;
         first++;
     }
     auto second = first;
-    while(second != (*db).end()){
+    while(second != db->end()){
         if((*second)->getExpire() != *expire) break;
         second++;
     }
@@ -159,23 +159,23 @@ void Database::loadFromFile(string *file){
 
 // print
 void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator start, vector<Task*>::iterator end){
-    cout << "+-----------------------------------------------------------------------------------------+\n"
-         << "| id              name          category      completed             expire(day/hr/min/sec)|\n"
-         << "+-----------------------------------------------------------------------------------------+\n";
+    cout << "+------------------------------------------------------------------------------------------+\n"
+         << "|  id              name          category      completed             expire(day/hr/min/sec)|\n"
+         << "+------------------------------------------------------------------------------------------+\n";
     for(auto itr = start; itr != end; itr++){
-        cout << "|" << setw(3) << (itr-begin);
+        cout << "|" << setw(4) << (itr-begin);
         (*itr)->showTask();
         cout << "|\n";
     }
-    cout << "+-----------------------------------------------------------------------------------------+\n";
+    cout << "+------------------------------------------------------------------------------------------+\n";
 }
 
 void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator itr){
-    cout << "+-----------------------------------------------------------------------------------------+\n"
-         << "| id              name          category      completed             expire(day/hr/min/sec)|\n"
-         << "+-----------------------------------------------------------------------------------------+\n";
-    cout << "|" << setw(3) << (itr-begin);
+    cout << "+------------------------------------------------------------------------------------------+\n"
+         << "|  id              name          category      completed             expire(day/hr/min/sec)|\n"
+         << "+------------------------------------------------------------------------------------------+\n";
+    cout << "|" << setw(4) << (itr-begin);
     (*itr)->showTask();
     cout << "|\n";
-    cout << "+-----------------------------------------------------------------------------------------+\n";
+    cout << "+------------------------------------------------------------------------------------------+\n";
 }
