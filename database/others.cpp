@@ -1,6 +1,9 @@
 #include "../database/database.h"
 #include "../task.h"
 #include <string>
+#include <vector>
+#include <iomanip>
+#include <iostream>
 #include <algorithm>
 #include <fstream>
 #include <sstream>
@@ -96,6 +99,8 @@ auto Database::searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector
     return {first, second};
 }
 
+
+// file I/O
 void Database::saveToFile(string *file){
 
     ofstream *out = new ofstream(*file);
@@ -150,4 +155,27 @@ void Database::loadFromFile(string *file){
     buffer = nullptr;
     ss = nullptr;
     in = nullptr;   
+}
+
+// print
+void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator start, vector<Task*>::iterator end){
+    cout << "+-----------------------------------------------------------------------------------------+\n"
+         << "| id              name          category      completed             expire(day/hr/min/sec)|\n"
+         << "+-----------------------------------------------------------------------------------------+\n";
+    for(auto itr = start; itr != end; itr++){
+        cout << "|" << setw(3) << (itr-begin);
+        (*itr)->showTask();
+        cout << "|\n";
+    }
+    cout << "+-----------------------------------------------------------------------------------------+\n";
+}
+
+void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator itr){
+    cout << "+-----------------------------------------------------------------------------------------+\n"
+         << "| id              name          category      completed             expire(day/hr/min/sec)|\n"
+         << "+-----------------------------------------------------------------------------------------+\n";
+    cout << "|" << setw(3) << (itr-begin);
+    (*itr)->showTask();
+    cout << "|\n";
+    cout << "+-----------------------------------------------------------------------------------------+\n";
 }

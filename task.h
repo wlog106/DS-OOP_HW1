@@ -42,9 +42,8 @@ public:
     int getExpire() const;
     time_t getExpireTime() const;
     void showRemainingTime();
+    void showTask();
 private:
     int *expire;
     time_t *expireTime;
 };
-
-ostream& operator << (ostream& out, Task &task);

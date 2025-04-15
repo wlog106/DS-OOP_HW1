@@ -39,9 +39,20 @@ int main(){
 
         cout << "\r";
 
-        History->push_back(*buffer);
-
         decodeBuffer(buffer, command, ss, str);
+
+        if(command->size() == 0){
+            *buffer = "";
+            *str = "";
+            ss->clear();
+            command->clear();
+            cout << symbol;
+            continue;
+        }
+        else {
+            History->push_back(*buffer);
+        }
+        
 
         if(!validator(command)){
             *buffer = "";
@@ -53,7 +64,7 @@ int main(){
         }
 
         if(command->front() == "help"){
-
+            
         }
         else if(command->front() == "exit"){
 
@@ -75,9 +86,6 @@ int main(){
             TodoList = nullptr;
             
             return 0;
-        }
-        else if(command->size() == 0){
-            continue;
         }
         else {
             router(TodoList, command);

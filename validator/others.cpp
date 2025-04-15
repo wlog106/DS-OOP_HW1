@@ -46,8 +46,8 @@ bool valueCheck(const string *flag, const string *value){
     // check name and category
     if(*flag == "-n" || *flag == "-c"){
         try{
-            if(value->length() > 20 || value->length() ==0 ){
-                throw invalid_argument("Length should be between 1 and 20");
+            if(value->length() > 15 || value->length() == 0){
+                throw invalid_argument("Length should be between 1 and 15");
             }
             return true;
         }
@@ -183,7 +183,6 @@ bool valueCheck(const string *flag, const string *value){
 }
 
 bool isValidDay(const int *year, const int *mon, const int *day){
-    cout << "year: " << *year << " mon: " << *mon << " day: " << *day << "\n";
     // big month
     if(*mon == 1 || *mon == 3 || *mon == 5 || *mon == 7 || *mon == 8 || *mon == 10 || *mon == 12){
         if(*day < 1 || *day > 31){

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include "task.h"
 
@@ -114,7 +115,7 @@ void Task::showRemainingTime(){
     *diff = difftime(*expireTime, time(NULL));
 
     if(*diff < 0){
-        cout <<  "Already Expired!\n";
+        cout << setw(35) <<  "Already Expired ";
         return;
     }
 
@@ -126,10 +127,10 @@ void Task::showRemainingTime(){
     int *min = new int(*diff/60);
     *diff %= 60;
 
-    cout << to_string(*day) << " days " 
-         << to_string(*hr) << " hours " 
-         << to_string(*min) << " minutes " 
-         << to_string(*diff) << " seconds\n";
+    cout << setw(35) << to_string(*day) + " days " 
+                      + to_string(*hr) + " hrs " 
+                      + to_string(*min) + " mins " 
+                      + to_string(*diff) + " secs ";
 
     delete diff;
     delete day;
@@ -141,17 +142,13 @@ void Task::showRemainingTime(){
     min = nullptr;
 }
 
-ostream& operator << (ostream& out, Task &task){
-
-    out << " Name: " << task.getName() << " " 
-        << "Category: " << task.getCategory() << " " 
-        << "CompletedState: " << task.showCompletedState() << " "
-        << "Time Remainig: ";
+void Task::showTask(){
+    cout << setw(18) << this->getName()
+         << setw(18) << this->getCategory()
+         << setw(15) << this->getCompleted();
     
-    if(task.getExpire() != expireState_None){
-        task.showRemainingTime();
+    if(this->getExpire() != expireState_None){
+        this->showRemainingTime();
     }
-    else out << "Due isn't set\n";
-
-    return out;
+    else cout << setw(35) << "Due isn't set ";
 }

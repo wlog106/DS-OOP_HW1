@@ -16,15 +16,12 @@ void Database::readAll(int *sortCriteria){
         }
         sort(db->begin(), db->end(), cmpByExpire);
     }
-
-    for(auto itr = db->begin(); itr != db->end(); itr++){
-        cout << "Id: " << itr-db->begin() << " " << *(*itr);
-    }
+    printDB(db->begin(), db->begin(), db->end());
 }
 void Database::readById(int *id){
     try{
         if((db->begin()+*id) >= db->end()) throw logic_error("Id: \"" + to_string(*id) + "\" not found");
-        cout << "Id: " << *id << " " << *(*(db->begin()+*id));
+        printDB(db->begin(), db->begin()+*id);
     }
     catch(exception &error){
         cout << "error: " << error.what() << "\n";
@@ -34,21 +31,26 @@ void Database::readByName(string *name){
     auto itr = searchByName(name);
     try{
         if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" not found");
-        cout << "Id: " << itr-db->begin() << " " << *(*itr);
+        printDB(db->begin(), itr);
     }
     catch(exception &error){
         cout << "error: " << error.what() << "\n";
     }
 }
 void Database::readByCategory(string *category){
-    auto itrPair = searchByCategory(category);
+
+    pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
+        = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByCategory(category));
+
     try{
-        if(itrPair.first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
-        for(auto itr = itrPair.first; itr != itrPair.second; itr++){
-            cout << "Id: " << itr-db->begin() << " " << *(*itr);
-        }
+        if(itrPair->first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
+        printDB(db->begin(), itrPair->first, itrPair->second);
+        delete itrPair;
+        itrPair = nullptr;
     }
     catch(exception &error){
+        delete itrPair;
+        itrPair = nullptr;
         cout << "error: " << error.what() << "\n";
     }
 }
@@ -59,14 +61,17 @@ void Database::readByCompleted(bool *completed){
         *state = "Completed";
     }
 
-    auto itrPair = searchByCompleted(completed);
+    pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
+        = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByCompleted(completed));
     try{
-        if(itrPair.first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
-        for(auto itr = itrPair.first; itr != itrPair.second; itr++){
-            cout << "Id: " << itr-db->begin() << " " << *(*itr);
-        }
+        if(itrPair->first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
+        printDB(db->begin(), itrPair->first, itrPair->second);
+        delete itrPair;
+        itrPair = nullptr;
     }
     catch(exception &error){
+        delete itrPair;
+        itrPair = nullptr;
         cout << "error: " << error.what() << "\n";
     }
 
@@ -83,14 +88,17 @@ void Database::readByExpire(int *expire){
         *state = "Due isn't set";
     }
 
-    auto itrPair = searchByExpire(expire);
+    pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
+        = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByExpire(expire));
     try{
-        if(itrPair.first == db->end()) throw logic_error("Expire State: \"" + *state + "\" not found");
-        for(auto itr = itrPair.first; itr != itrPair.second; itr++){
-            cout << "Id: " << itr-db->begin() << " " << *(*itr);
-        }
+        if(itrPair->first == db->end()) throw logic_error("Expire State: \"" + *state + "\" not found");
+        printDB(db->begin(), itrPair->first, itrPair->second);
+        delete itrPair;
+        itrPair = nullptr;
     }
     catch(exception &error){
+        delete itrPair;
+        itrPair = nullptr;
         cout << "error: " << error.what() << "\n";
     }
 }

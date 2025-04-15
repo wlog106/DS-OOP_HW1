@@ -20,9 +20,10 @@ bool cmpByExpire(const Task *a, const Task *b);
 
 class Database {
 public:
-    //constructor
+    // constructor
     Database();
     
+    // destructor
     ~Database();
 
     // create
@@ -62,8 +63,13 @@ public:
     auto searchByCompleted(bool *completed)->pair<vector<Task*>::iterator, vector<Task*>::iterator>;
     auto searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>;
     
+    // file I/O
     void saveToFile(string *file);
     void loadFromFile(string *file);
+
+    // print
+    void printDB (vector<Task*>::iterator begin, vector<Task*>::iterator start, vector<Task*>::iterator end);
+    void printDB (vector<Task*>::iterator begin, vector<Task*>::iterator itr);
 
 private:
     vector<Task*> *db;
