@@ -25,11 +25,11 @@ Commands
 #### `upt <search-flag> <search-value> <update-flag> <new-value>`<br>
 |🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
 |:----------|:---------------|:---------------------|
-|`-i, --id`|`search` by id|an inetger|
-|`-n, --name`|`search/update` the task name|0 < length <= 15|
-|`-c, --category`|`update` the task category|0 < length <= 15|
-|`-C, --completed`|`update` the task completed status|`true/false`|
-|`-d, --due`|`update` the due of the task|`YYYY-MM-DD@hr:min:sec`|
+|`-i, --id`|**search** by id|an inetger|
+|`-n, --name`|**search/update** the task name|0 < length <= 15|
+|`-c, --category`|**update** the task category|0 < length <= 15|
+|`-C, --completed`|**update** the task completed status|`true/false`|
+|`-d, --due`|**update** the due of the task|`YYYY-MM-DD@hr:min:sec`|
 
 ### Delete
 #### `rm <flag> <value>`<br>
