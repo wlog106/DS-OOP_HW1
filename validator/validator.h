@@ -16,11 +16,8 @@ bool flagCheck(const deque<string> *command, const set<set<string>> *flagSet);
 bool valueCheck(const string *flag, const string *value);
 
 bool CreateValidator(const deque<string> *command);
-
 bool ReadValidator(const deque<string> *command);
-
 bool UpdateValidator(const deque<string> *command);
-
 bool DeleteValidator(const deque<string> *command);
 
 bool isValidDay(const int *year, const int *mon, const int *day);

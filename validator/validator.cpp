@@ -9,7 +9,7 @@ using namespace std;
 
 bool validator(const deque<string> *command){
     if(command->size()%2 == 0){
-        cout << "error: Invalid Command\n";
+        cout << "error: invalid Command\n";
         return false;
     }
     else if(command->front() == "add"){
