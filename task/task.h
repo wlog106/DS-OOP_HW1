@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 
-#define expireState_None 4
-#define expireState_True 5
-#define expireState_False 6
+#define expireStatus_None 4
+#define expireStatus_True 5
+#define expireStatus_False 6
 
 using namespace std;
 
@@ -22,7 +22,7 @@ public:
     string getName() const;
     string getCategory() const;
     bool getCompleted() const;
-    string showCompletedState() const;
+    string showCompletedStatus() const;
 protected:
     string *name;
     string *category;
@@ -38,7 +38,7 @@ public:
 
     void setDue(string *due);
     void setDue(time_t *t);
-    void updateExpireState();
+    void updateExpireStatus();
     int getExpire() const;
     time_t getExpireTime() const;
     void showRemainingTime();

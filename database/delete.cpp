@@ -69,14 +69,14 @@ void Database::deleteByCategory(string *category){
 }
 void Database::deleteByCompleted(bool *completed){
 
-    string *state = new string("Not Completed");
+    string *status = new string("Not Completed");
     if(*completed){
-        *state = "Completed";
+        *status = "Completed";
     }
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Task with Completed State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Completed Status: \"" + *status + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             existedName->erase((*itr)->getName());
@@ -94,22 +94,22 @@ void Database::deleteByCompleted(bool *completed){
         cout << error.what() << "\n"; 
     }
 
-    delete state;
-    state = nullptr;
+    delete status;
+    status = nullptr;
 }
 void Database::deleteByExpire(int *expire){
 
-    string *state = new string("Not Expired");
-    if(*expire == expireState_True){
-        *state = "Expired";
+    string *status = new string("Not Expired");
+    if(*expire == expireStatus_True){
+        *status = "Expired";
     }
-    else if(*expire == expireState_None){
-        *state = "Due isn't set";
+    else if(*expire == expireStatus_None){
+        *status = "Due isn't set";
     }
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Task with Expire State: \"" + *state + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Expire Status: \"" + *status + "\" not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;
@@ -126,6 +126,6 @@ void Database::deleteByExpire(int *expire){
         cout << error.what() << "\n";
     }
 
-    delete state;
-    state = nullptr;
+    delete status;
+    status = nullptr;
 }

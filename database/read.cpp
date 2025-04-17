@@ -12,7 +12,7 @@ void Database::readAll(int *sortCriteria){
     else if(*sortCriteria == sortCriteria_Completed) sort(db->begin(), db->end(), cmpByCompleted);
     else if(*sortCriteria == sortCriteria_Expire){
         for(auto itr = db->begin(); itr != db->end(); itr++){
-            (*itr)->updateExpireState();
+            (*itr)->updateExpireStatus();
         }
         sort(db->begin(), db->end(), cmpByExpire);
     }
@@ -56,15 +56,15 @@ void Database::readByCategory(string *category){
 }
 void Database::readByCompleted(bool *completed){
 
-    string *state = new string("Not Completed");
+    string *status = new string("Not Completed");
     if(*completed){
-        *state = "Completed";
+        *status = "Completed";
     }
 
     pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
         = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByCompleted(completed));
     try{
-        if(itrPair->first == db->end()) throw logic_error("Completed State: \"" + *state + "\" not found");
+        if(itrPair->first == db->end()) throw logic_error("Completed Status: \"" + *status + "\" not found");
         printDB(db->begin(), itrPair->first, itrPair->second);
         delete itrPair;
         itrPair = nullptr;
@@ -75,23 +75,23 @@ void Database::readByCompleted(bool *completed){
         cout << "error: " << error.what() << "\n";
     }
 
-    delete state;
-    state = nullptr;
+    delete status;
+    status = nullptr;
 }
 void Database::readByExpire(int *expire){
 
-    string *state = new string("Not Expired");
-    if(*expire == expireState_True){
-        *state = "Expired";
+    string *status = new string("Not Expired");
+    if(*expire == expireStatus_True){
+        *status = "Expired";
     }
-    else if(*expire == expireState_None){
-        *state = "Due isn't set";
+    else if(*expire == expireStatus_None){
+        *status = "Due isn't set";
     }
 
     pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
         = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByExpire(expire));
     try{
-        if(itrPair->first == db->end()) throw logic_error("Expire State: \"" + *state + "\" not found");
+        if(itrPair->first == db->end()) throw logic_error("Expire Status: \"" + *status + "\" not found");
         printDB(db->begin(), itrPair->first, itrPair->second);
         delete itrPair;
         itrPair = nullptr;

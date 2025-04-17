@@ -46,26 +46,26 @@ string Basic_task::getCategory() const{
 bool Basic_task::getCompleted() const{
     return *(this->completed);
 }
-string Basic_task::showCompletedState() const{
+string Basic_task::showCompletedStatus() const{
     if(*completed) return "Yes";
     return "No";
 }
 
 //Task
 Task::Task(){
-    expire = new int(expireState_None);
+    expire = new int(expireStatus_None);
     expireTime = new time_t;
 }
 
 Task::Task(string *name, string *category, bool *completed): 
     Basic_task(name, category, completed){
-    expire = new int(expireState_None);
+    expire = new int(expireStatus_None);
     expireTime = new time_t;
 }
 
 Task::Task(string *name, string *category, string *due, bool *completed): 
     Basic_task(name, category, completed){
-    expire = new int(expireState_None);
+    expire = new int(expireStatus_None);
     expireTime = new time_t;
     setDue(due);
 }
@@ -86,19 +86,19 @@ void Task::setDue(string *due){
     dueTime->tm_min  = stoi(due->substr(14, 2));
     dueTime->tm_sec  = stoi(due->substr(17, 2));
     *(this->expireTime) = mktime(dueTime);
-    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireStatus_True : expireStatus_False;
     delete due;
     due = nullptr;
 }
 
 void Task::setDue(time_t *t){
     expireTime = t;
-    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireStatus_True : expireStatus_False;
 }
 
-void Task::updateExpireState(){
-    if(*expire == expireState_None) return;
-    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireState_True : expireState_False;
+void Task::updateExpireStatus(){
+    if(*expire == expireStatus_None) return;
+    *expire = difftime(*expireTime, time(NULL)) < 0 ? expireStatus_True : expireStatus_False;
 }
 
 time_t Task::getExpireTime() const{
@@ -155,7 +155,7 @@ void Task::showTask(){
          << setw(18) << this->getCategory()
          << setw(15) << *str;
     
-    if(this->getExpire() != expireState_None){
+    if(this->getExpire() != expireStatus_None){
         this->showRemainingTime();
     }
     else cout << setw(35) << "Due isn't set ";

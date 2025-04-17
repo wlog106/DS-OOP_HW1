@@ -83,7 +83,7 @@ auto Database::searchByCompleted(bool *completed)->pair<vector<Task*>::iterator,
 }
 auto Database::searchByExpire(int *expire)->pair<vector<Task*>::iterator, vector<Task*>::iterator>{
     for(auto itr = db->begin(); itr != db->end(); itr++){
-        (*itr)->updateExpireState();
+        (*itr)->updateExpireStatus();
     }
     sort(db->begin(), db->end(), cmpByExpire);
     auto first = db->begin();
@@ -108,7 +108,7 @@ void Database::saveToFile(string *file){
         *out << (*itr)->getName() << " " 
              << (*itr)->getCategory() << " "
              << (*itr)->getCompleted() << " ";
-             if((*itr)->getExpire() == expireState_None){
+             if((*itr)->getExpire() == expireStatus_None){
                 *out << 0 << "\n";
              }
              else{

@@ -10,7 +10,7 @@ void router(Database *db, deque<string> *command);
 
 void strTo_Completed(bool *completed, string *str);
 void strTo_SortCriteria(int *sortCriteria, string *str);
-void strTo_ExpireState(int *expire, string *str);
+void strTo_ExpireStatus(int *expire, string *str);
 
 void Create(Database *db, deque<string> *command);
 void Read(Database *db, deque<string> *command);

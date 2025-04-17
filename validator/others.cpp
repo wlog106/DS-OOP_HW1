@@ -154,7 +154,7 @@ bool valueCheck(const string *flag, const string *value){
     else if(*flag == "-C" || *flag == "--completed"){
         try{
             if(*value != "true" && *value != "false"){
-                throw invalid_argument("invalid completed state");
+                throw invalid_argument("invalid completed Status");
             }
             return true;
         }
@@ -168,7 +168,7 @@ bool valueCheck(const string *flag, const string *value){
     else if(*flag == "-e" || *flag == "--expire"){
         try{
             if(*value != "true" && *value != "false"){
-                throw invalid_argument("invalid expire state");
+                throw invalid_argument("invalid expire Status");
             }
             return true;
         }

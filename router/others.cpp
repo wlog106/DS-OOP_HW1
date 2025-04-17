@@ -17,7 +17,7 @@ void strTo_SortCriteria(int *sortCritetria, string *str){
     else if(*str == "expire") *sortCritetria = sortCriteria_Expire;
 }
 
-void strTo_ExpireState(int *expire, string *str){
-    if(*str == "true") *expire = expireState_True;
-    else if(*str == "false") *expire = expireState_False;
+void strTo_ExpireStatus(int *expire, string *str){
+    if(*str == "true") *expire = expireStatus_True;
+    else if(*str == "false") *expire = expireStatus_False;
 }

@@ -50,7 +50,7 @@ void Delete(Database *db, deque<string> *command){
         // list a part, search by expire
         else if(command->front() == "-e" || command->front() == "--expire"){
             command->pop_front();
-            strTo_ExpireState(expire, &command->front());
+            strTo_ExpireStatus(expire, &command->front());
             command->pop_front();
             db->deleteByExpire(expire);
         }
