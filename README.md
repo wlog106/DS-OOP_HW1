@@ -1,70 +1,42 @@
-Tree  
----
-main.cpp  
-|---database  
-|[Tab]|---create.cpp\
-|[Tab]|---read.cpp\
-|[Tab]|---update.cpp\  
-|[Tab]|---delete.cpp\ 
-|[Tab]|---others.cpp\  
-|[Tab]+---database.h\  
-|---router\  
-|[Tab]|---router.cpp\  
-|[Tab]|---create.cpp\  
-|[Tab]|---read.cpp\  
-|[Tab]|---update.cpp\  
-|[Tab]|---delete.cpp\  
-|[Tab]|---others.cpp\  
-|[Tab]+---router.h\  
-|---validator\  
-|[Tab]|---validator.cpp\  
-|[Tab]|---create.cpp\  
-|[Tab]|---read.cpp\  
-|[Tab]|---update.cpp\  
-|[Tab]|---delete.cpp\  
-|[Tab]|---others.cpp\  
-|[Tab]+---validator.h\  
-|---input\  
-|[Tab]|---input.cpp\  
-|[Tab]|---unix.cpp\  
-|[Tab]|---windows.cpp\  
-|[Tab]|---others.cpp\  
-|[Tab]+---input.h\  
-+---task\  
- [Tab]|---task.cpp\  
- [Tab]+---task.h\  
-
 Commands
 ---
 
-Create option: add <flag1> <input1> <flag2> <input2>...\
-    ==flags==                                   ==input constraints==            ==\
-    -n, --name                                  0 < length <= 15                 set a task name\  
-    -c, --category                              0 < length <= 15                 set a task category\ 
-    -C, --completed (default=false)             true/false                       set a completed state of task (optional)\  
-    -d, --due                                   YYYY-MM-DD@hr:min:sec            set a due for task (optional)\  
+### Create
+#### `add <flag1> <value1> <flag2> <value2>...`<br>
+|🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
+|:----------|:---------------|:---------------------|
+|`-n, --name`|set the task name|0 < length <= 15|
+|`-c, --category`|set the task category|0 < length <= 15|
+|`-C, --completed`|set task as completed status**(optional)**|`true/false` (default=`false`)|
+|`-d, --due`|set a due for the task **(optional)**|`YYYY-MM-DD@hr:min:sec`|
      
-Read option: ls <flag> <input>\
-    ==flags==                                   ==input constraints==\
-    -a, --all                                   name/category/completed/expire            list all task by specific\ 
-    -i, --id                                    an integer\
-    -n, --name                                  0 < length <= 15\
-    -c, --category                              0 < length <= 15\
-    -C, --completed                             true/false\
-    -e, --expire                                true/false\
+### Read
+#### `ls <flag> <value>`<br>
+|🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
+|:----------|:---------------|:---------------------|
+|`-a, --all`|show all tasks by selected criteria|`name/category/completed/expire`|
+|`-i, --id`|show task by seleted id|an integer|
+|`-n, --name`|show task matching the given name|0 < length <= 15|
+|`-c, --category`|show all tasks matching the given category|0 < length <= 15|
+|`-C, --completed`|show all tasks with the given completed status|`true/fasle`|
+|`-e, --expire`|show all tasks with the given expire status|`true/false`|
 
-Update option: upt <flag1> <input1> <flag2> <input2> // update flag2 by searching flag1\
-    ==flags==                                   ==input constraints==\
-    -i, --id                                    an inetger\
-    -n, --name                                  0 < length <= 15\
-    -c, --category                              0 < length <= 15\
-    -C, --completed                             true/false\
-    -d, --due                                   YYYY-MM-DD@hr:min:sec\
+### Update
+#### `upt <search-flag> <search-value> <update-flag> <new-value>`<br>
+|🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
+|:----------|:---------------|:---------------------|
+|`-i, --id`|`search` by id|an inetger|
+|`-n, --name`|`search/update` the task name|0 < length <= 15|
+|`-c, --category`|`update` the task category|0 < length <= 15|
+|`-C, --completed`|`update` the task completed status|`true/false`|
+|`-d, --due`|`update` the due of the task|`YYYY-MM-DD@hr:min:sec`|
 
-Delete option: rm <flag> <input>
-    ==flags==                                   ==input constraints==\
-    -i, --id                                    an integer
-    -n, --name                                  0 < length <= 15\
-    -c, --category                              0 < length <= 15\
-    -C, --completed                             true/false\
-    -e, --expire                                true/false\
+### Delete
+#### `rm <flag> <value>`<br>
+|🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
+|:----------|:---------------|:---------------------|
+|`-i, --id`|delete the task by selected id|an integer|
+|`-n, --name`|delete the task matching the given name|0 < length <= 15|
+|`-c, --category`|delete all the tasks matching the given category|0 < length <= 15|
+|`-C, --completed`|delete all the tasks matching the given completed status|`true/false`|
+|`-e, --expire`|delete all the tasks matching the given expire status|`true/false`|
