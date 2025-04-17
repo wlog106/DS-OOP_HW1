@@ -50,11 +50,19 @@ D(validator) --checks validity--> A
 E(input) --user input--> A
 ```
 
-Command Line Features 
+Some Features 
 ---
 *Note: Both features are available on UNIX and windows system*
 - Navigate command history using the `Up` and `Down` arrow keys  
 - Move the cursor using the `Left` and `Right` arrow keys
+- Data can be `Save` and `Load` from .txt file
+- Solid user input `validator`
+
+Thanks
+---
+- *My roomate and ChatGPT's inspiring ideas*
+- *TAs' Q&A fourm*
+
 
 
 
