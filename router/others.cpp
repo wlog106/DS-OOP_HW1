@@ -6,8 +6,8 @@
 using namespace std;
 
 void strTo_Completed(bool *completed, string *str){
-    if(*str == "yes") *completed = true;
-    else if(*str == "no") *completed = false;
+    if(*str == "true") *completed = true;
+    else if(*str == "false") *completed = false;
 }
 
 void strTo_SortCriteria(int *sortCritetria, string *str){

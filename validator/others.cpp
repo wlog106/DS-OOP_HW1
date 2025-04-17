@@ -153,7 +153,7 @@ bool valueCheck(const string *flag, const string *value){
     // check complete
     else if(*flag == "-C" || *flag == "--completed"){
         try{
-            if(*value != "yes" && *value != "no"){
+            if(*value != "true" && *value != "false"){
                 throw invalid_argument("invalid completed state");
             }
             return true;

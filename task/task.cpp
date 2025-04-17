@@ -146,10 +146,10 @@ void Task::showTask(){
 
     string *str = new string;
     if(this->getCompleted()){
-        *str = "yes";
+        *str = "true";
     }
     else {
-        *str = "no";
+        *str = "false";
     }
     cout << setw(18) << this->getName()
          << setw(18) << this->getCategory()
