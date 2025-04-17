@@ -116,7 +116,7 @@ void idCheck(const string *value){
 void dueCheck(const string *value){
     if(value->at(4) != '-' || value->at(7) != '-' || value->at(10) != '@' 
         || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
-        throw invalid_argument("invalid format: \"" + *value + "\" \nType \"help\" to see correct format");
+        throw invalid_argument("invalid format: \'" + *value + "\' \nFormat: YYYY-MM-DD@hr:min:sec");
     }
     // check 0 ~ 9
     if(    static_cast<int>(value->at(0))  > 57 || static_cast<int>(value->at(1))  > 57
@@ -165,12 +165,12 @@ void dueCheck(const string *value){
 
 void completedStatusCheck(const string *value){
     if(*value != "true" && *value != "false"){
-        throw invalid_argument("invalid completed status");
+        throw invalid_argument("invalid completed status, status should be true/false");
     }
 }
 
 void expireStatusCheck(const string *value){
     if(*value != "true" && *value != "false"){
-        throw invalid_argument("invalid expire status");
+        throw invalid_argument("invalid expire status, status should be true/false");
     }
 }

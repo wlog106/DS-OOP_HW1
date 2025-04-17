@@ -19,6 +19,7 @@ using namespace std;
 
 
 void decodeBuffer(string *buffer, deque<string> *commmand, stringstream *ss, string* str);
+void showHelpMenu();
 
 
 int main(){
@@ -64,9 +65,9 @@ int main(){
         }
 
         if(command->front() == "help"){
-
+            showHelpMenu();
         }
-        else if(command->front() == "exit"){
+        else if(command->front() == "exit" || command->front() == "quit"){
 
             TodoList->saveToFile(file);
             
@@ -109,5 +110,37 @@ void decodeBuffer(string *buffer, deque<string> *command, stringstream *ss, stri
         command->push_back(*str);
     }
 
+}
+
+void showHelpMenu(){
+    cout << "<-----------------------------------HELP MENU---------------------------------->";
+    cout << "| add <flag1> <value1> <flag2> <value2>...\n                                   |"
+         << "|    -n, --name              set the task name\n                               |"
+         << "|    -c, --category          set the task category\n                           |"
+         << "|    -C, --completed         set task as completed status (optional)\n         |"
+         << "|    -d, --due               set a due for the task (optional)\n               |"
+         << "| \n                                                                           |"
+         << "| ls <flag> <value>\n                                                          |"
+         << "|    -a, --all               show tasks by selected criteria\n                 |"
+         << "|    -i, --id                show task by id\n                                 |"
+         << "|    -n, --name              show task by name\n                               |"
+         << "|    -c, --category          show tasks by category\n                          |"
+         << "|    -C, --completed         filter by completed status\n                      |"
+         << "|    -e, --expire            filter by expire status\n                         |"
+         << "| \n                                                                           |"
+         << "| upt <search-flag> <search-value> <update-flag> <new-value>\n                 |"
+         << "|    -i, --id                search by id\n                                    |"
+         << "|    -n, --name              serach/update by name\n                           |"
+         << "|    -c, --category          update by category\n                              |"
+         << "|    -C, --completed         update the task completed status\n                |"
+         << "|    -d, --due               update the due of the task\n                      |"
+         << "| \n                                                                           |"
+         << "| rm <flag> <value>\n                                                          |"
+         << "|    -i, --id                delete the task by selected id\n                  |"
+         << "|    -n, --name              delete the task matching the given name\n         |"
+         << "|    -c, --category          delete tasks matching the given category\n        |"
+         << "|    -C, --completed         delete tasks matching the given completed status\n|"
+         << "|    -e, --expire            delete tasks matching the given expire status\n   |";
+    cout << "<------------------------------------------------------------------------------>";
 }
 

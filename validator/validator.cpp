@@ -27,7 +27,7 @@ bool validator(const deque<string> *command){
     else if(command->front() == "help"){
         return true;
     }
-    else if(command->front() == "exit"){
+    else if(command->front() == "exit" || command->front() == "quit"){
         delete CreateFlagSet;
         delete ReadFlagSet;
         delete UpdateFlagSet;
