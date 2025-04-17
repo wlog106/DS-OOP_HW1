@@ -6,19 +6,19 @@ Commands
 |:----------|:---------------|:---------------------|
 |`-n, --name`|set the task name|*Length: 1-15*|
 |`-c, --category`|set the task category|*Length: 1-15*|
-|`-C, --completed`|set task as completed status **(optional)**|*Options:* `true/false` (default=`false`)|
+|`-C, --completed`|set task as completed status **(optional)**|*Options:* `true / false` (default=`false`)|
 |`-d, --due`|set a due for the task **(optional)**|*Format:* `YYYY-MM-DD@hr:min:sec`|
      
 ### Read
 #### `ls <flag> <value>`
 |🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
 |:----------|:---------------|:---------------------|
-|`-a, --all`|show all tasks by selected criteria|*Options:* `name/category/completed/expire`|
+|`-a, --all`|show all tasks by selected criteria|*Options:*<br>`name / category / completed / expire`|
 |`-i, --id`|show task by seleted id|*Type: Integer*|
 |`-n, --name`|show task matching the given name|*Length: 1-15*|
 |`-c, --category`|show all tasks matching the given category|*Length: 1-15*|
-|`-C, --completed`|show all tasks with the given completed status|*Options:* `true/fasle`|
-|`-e, --expire`|show all tasks with the given expire status|*Options:* `true/false`|
+|`-C, --completed`|show all tasks with the given completed status|*Options:* `true / fasle`|
+|`-e, --expire`|show all tasks with the given expire status|*Options:* `true / false`|
 
 ### Update
 #### `upt <search-flag> <search-value> <update-flag> <new-value>`
@@ -27,7 +27,7 @@ Commands
 |`-i, --id`|**search** by id|*Type: Integer*|
 |`-n, --name`|**search/update** the task name|*Length: 1-15*|
 |`-c, --category`|**update** the task category|*Length: 1-15*|
-|`-C, --completed`|**update** the task completed status|*Options:* `true/false`|
+|`-C, --completed`|**update** the task completed status|*Options:* `true / false`|
 |`-d, --due`|**update** the due of the task|*Format:* `YYYY-MM-DD@hr:min:sec`|
 
 ### Delete
@@ -37,8 +37,8 @@ Commands
 |`-i, --id`|delete the task by selected id|*Type: Integer*|
 |`-n, --name`|delete the task matching the given name|*Length: 1-15*|
 |`-c, --category`|delete all the tasks matching the given category|*Length: 1-15*|
-|`-C, --completed`|delete all the tasks matching the given completed status|*Options:* `true/false`|
-|`-e, --expire`|delete all the tasks matching the given expire status|*Options:* `true/false`|
+|`-C, --completed`|delete all the tasks matching the given completed status|*Options:* `true / false`|
+|`-e, --expire`|delete all the tasks matching the given expire status|*Options:* `true / false`|
 
 Logic
 ---
