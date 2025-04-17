@@ -13,12 +13,12 @@ Commands
 #### `ls <flag> <value>`
 |🚩**Flags**|↪️**Description**|⚠️**Input Constraints**|
 |:----------|:---------------|:---------------------|
-|`-a, --all`|show all tasks by selected criteria|*Options:*<br>`name / category / completed / expire`|
-|`-i, --id`|show task by seleted id|*Type: Integer*|
-|`-n, --name`|show task matching the given name|*Length: 1-15*|
-|`-c, --category`|show all tasks matching the given category|*Length: 1-15*|
-|`-C, --completed`|show tasks by completed status|*Options:* `true / fasle`|
-|`-e, --expire`|show tasks by expire status|*Options:* `true / false`|
+|`-a, --all`|show tasks by selected criteria|*Options:* `name / category / completed / expire`|
+|`-i, --id`|show task by id|*Type: Integer*|
+|`-n, --name`|show task by name|*Length: 1-15*|
+|`-c, --category`|show tasks by category|*Length: 1-15*|
+|`-C, --completed`|filter by completed status|*Options:* `true / fasle`|
+|`-e, --expire`|filter by expire status|*Options:* `true / false`|
 
 ### Update
 #### `upt <search-flag> <search-value> <update-flag> <new-value>`
