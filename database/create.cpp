@@ -13,6 +13,7 @@ void Database::createWithoutDue(string *name, string *category, bool *completed)
         Task *task = new Task(name, category, completed);
         db->push_back(task);
         existedName->insert(*name);
+        readByName(name);
     }
     catch(exception &error){
         cout << "error: " << error.what() << "\n";
@@ -28,6 +29,7 @@ void Database::createWithDue(string *name, string *category, string *due, bool *
         Task *task = new Task(name, category, due, completed);
         db->push_back(task);
         existedName->insert(*name);
+        readByName(name);
     }
     catch(exception &error){
         cout << "error: " << error.what() << "\n";
