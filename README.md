@@ -40,6 +40,11 @@ Commands
 |`-C, --completed`|delete all the tasks matching the given completed status|*Options:* `true / false`|
 |`-e, --expire`|delete all the tasks matching the given expire status|*Options:* `true / false`|
 
+### Others
+#### `help` , `exit/quit`
+- Use `help` to show HELP MENU
+- Use `exit/quit` to terminate the TodoList
+
 Logic
 ---
 ```mermaid
