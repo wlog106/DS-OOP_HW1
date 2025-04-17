@@ -26,6 +26,13 @@ bool DeleteValidator(const deque<string> *command);
 bool isValidDay(const int *year, const int *mon, const int *day);
 bool isLeapYear(const int *year);
 
+void nameNcategoryCheck(const string *value);
+void allCheck(const string *value);
+void idCheck(const string *value);
+void dueCheck(const string *value);
+void completedStatusCheck(const string *value);
+void expireStatusCheck(const string *value);
+
 extern set<string> *ReadFlagSet, *DeleteFlagSet;
 
 extern set<set<string>> *CreateFlagSet, *UpdateFlagSet;

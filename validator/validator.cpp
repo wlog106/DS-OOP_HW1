@@ -8,7 +8,11 @@
 using namespace std;
 
 bool validator(const deque<string> *command){
-    if(command->front() == "add"){
+    if(command->size()%2 == 0){
+        cout << "error: Invalid Command\n";
+        return false;
+    }
+    else if(command->front() == "add"){
         return CreateValidator(command);
     }
     else if(command->front() == "ls"){

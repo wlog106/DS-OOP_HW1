@@ -21,7 +21,7 @@ void unixCommandLine(string *buffer, deque<string> *History){
     auto HistoryItr = History->end();
     system("/bin/stty raw");
     while(*ch = getchar()){
-            if(*ch == 27){
+        if(*ch == 27){
             *ch = getchar();
             *ch = getchar();
             // arrow key
@@ -65,8 +65,7 @@ void unixCommandLine(string *buffer, deque<string> *History){
             cout << "\b \b\n";
             break;
         }
-
-        // block invalid input (something like ctl+c won't render but it was inserted)
+        // printable chars
         else if(*ch >= 32 && *ch <= 126) {
             BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
             BufferItr++;
