@@ -57,7 +57,8 @@ E(input) --user input--> A
 
 Some Features 
 ---
-*Note: Both features are available on UNIX and windows system*
+*Note: All features should work well on both UNIX and windows system*  
+*Tested on Fedora 41 (kernel 6.13.11, gnome 47.5), windows 11*
 - Navigate command history using the `Up` and `Down` arrow keys  
 - Move the cursor using the `Left` and `Right` arrow keys
 - Data can be `Save` and `Load` from .txt file
@@ -65,8 +66,8 @@ Some Features
 
 Thanks
 ---
-- *My roomate and ChatGPT's inspiring ideas*
-- *TAs' Q&A fourm*
+- *My friends' and ChatGPT's inspiring ideas*
+- *TAs' Q&A forum*
 
 
 
