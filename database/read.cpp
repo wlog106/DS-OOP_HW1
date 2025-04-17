@@ -20,7 +20,7 @@ void Database::readAll(int *sortCriteria){
 }
 void Database::readById(int *id){
     try{
-        if((db->begin()+*id) >= db->end()) throw logic_error("Id: \"" + to_string(*id) + "\" not found");
+        if((db->begin()+*id) >= db->end()) throw logic_error("Id: \'" + to_string(*id) + "\' not found");
         printDB(db->begin(), db->begin()+*id);
     }
     catch(exception &error){
@@ -30,7 +30,7 @@ void Database::readById(int *id){
 void Database::readByName(string *name){
     auto itr = searchByName(name);
     try{
-        if(itr == db->end()) throw logic_error("Name: \"" + *name + "\" not found");
+        if(itr == db->end()) throw logic_error("Name: \'" + *name + "\' not found");
         printDB(db->begin(), itr);
     }
     catch(exception &error){
@@ -43,7 +43,7 @@ void Database::readByCategory(string *category){
         = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByCategory(category));
 
     try{
-        if(itrPair->first == db->end()) throw logic_error("Category: \"" + *category + "\" not found");
+        if(itrPair->first == db->end()) throw logic_error("Category: \'" + *category + "\' not found");
         printDB(db->begin(), itrPair->first, itrPair->second);
         delete itrPair;
         itrPair = nullptr;
@@ -56,15 +56,15 @@ void Database::readByCategory(string *category){
 }
 void Database::readByCompleted(bool *completed){
 
-    string *status = new string("Not Completed");
+    string *status = new string("false");
     if(*completed){
-        *status = "Completed";
+        *status = "true";
     }
 
     pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
         = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByCompleted(completed));
     try{
-        if(itrPair->first == db->end()) throw logic_error("Completed Status: \"" + *status + "\" not found");
+        if(itrPair->first == db->end()) throw logic_error("Completed Status: \'" + *status + "\' not found");
         printDB(db->begin(), itrPair->first, itrPair->second);
         delete itrPair;
         itrPair = nullptr;
@@ -80,9 +80,9 @@ void Database::readByCompleted(bool *completed){
 }
 void Database::readByExpire(int *expire){
 
-    string *status = new string("Not Expired");
+    string *status = new string("false");
     if(*expire == expireStatus_True){
-        *status = "Expired";
+        *status = "true";
     }
     else if(*expire == expireStatus_None){
         *status = "Due isn't set";
@@ -91,7 +91,7 @@ void Database::readByExpire(int *expire){
     pair<vector<Task*>::iterator, vector<Task*>::iterator> *itrPair 
         = new pair<vector<Task*>::iterator, vector<Task*>::iterator>(searchByExpire(expire));
     try{
-        if(itrPair->first == db->end()) throw logic_error("Expire Status: \"" + *status + "\" not found");
+        if(itrPair->first == db->end()) throw logic_error("Expire Status: \'" + *status + "\' not found");
         printDB(db->begin(), itrPair->first, itrPair->second);
         delete itrPair;
         itrPair = nullptr;

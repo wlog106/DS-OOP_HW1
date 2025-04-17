@@ -22,7 +22,7 @@ public:
     string getName() const;
     string getCategory() const;
     bool getCompleted() const;
-    string showCompletedStatus() const;
+    
 protected:
     string *name;
     string *category;

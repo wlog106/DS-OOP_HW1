@@ -9,7 +9,7 @@ void Database::deleteById(int *id){
 
     auto itr = db->begin()+*id;
     try{
-        if(itr == db->end()) throw logic_error("Task with Id: " + to_string(*id) + " Not Found");
+        if(itr == db->end()) throw logic_error("Task with Id: \'" + to_string(*id) + "\' Not Found");
 
         existedName->erase((*itr)->getName());
         delete *itr;
@@ -29,7 +29,7 @@ void Database::deleteByName(string *name){
 
     auto itr = searchByName(name);
     try{
-        if(itr == db->end()) throw logic_error("Task with Name: \"" + *name + "\" Not Found");
+        if(itr == db->end()) throw logic_error("Task with Name: \'" + *name + "\' Not Found");
 
         existedName->erase((*itr)->getName());
         delete *itr;
@@ -49,7 +49,7 @@ void Database::deleteByCategory(string *category){
 
     auto itrPair = searchByCategory(category);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Task with Category: \"" + *category + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Category: \'" + *category + "\' not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             existedName->erase((*itr)->getName());
@@ -69,14 +69,14 @@ void Database::deleteByCategory(string *category){
 }
 void Database::deleteByCompleted(bool *completed){
 
-    string *status = new string("Not Completed");
+    string *status = new string("false");
     if(*completed){
-        *status = "Completed";
+        *status = "true";
     }
 
     auto itrPair = searchByCompleted(completed);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Task with Completed Status: \"" + *status + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Completed Status: \'" + *status + "\' not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             existedName->erase((*itr)->getName());
@@ -99,9 +99,9 @@ void Database::deleteByCompleted(bool *completed){
 }
 void Database::deleteByExpire(int *expire){
 
-    string *status = new string("Not Expired");
+    string *status = new string("false");
     if(*expire == expireStatus_True){
-        *status = "Expired";
+        *status = "true";
     }
     else if(*expire == expireStatus_None){
         *status = "Due isn't set";
@@ -109,7 +109,7 @@ void Database::deleteByExpire(int *expire){
 
     auto itrPair = searchByExpire(expire);
     try{
-        if(itrPair.first == db->end()) throw logic_error("Task with Expire Status: \"" + *status + "\" not found");
+        if(itrPair.first == db->end()) throw logic_error("Task with Expire Status: \'" + *status + "\' not found");
 
         for(auto itr = itrPair.first; itr!=itrPair.second; itr++){
             delete *itr;

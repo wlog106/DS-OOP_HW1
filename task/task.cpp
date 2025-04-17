@@ -46,10 +46,6 @@ string Basic_task::getCategory() const{
 bool Basic_task::getCompleted() const{
     return *(this->completed);
 }
-string Basic_task::showCompletedStatus() const{
-    if(*completed) return "Yes";
-    return "No";
-}
 
 //Task
 Task::Task(){
