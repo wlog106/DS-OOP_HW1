@@ -17,8 +17,8 @@ Commands
 |`-i, --id`|show task by seleted id|*Type: Integer*|
 |`-n, --name`|show task matching the given name|*Length: 1-15*|
 |`-c, --category`|show all tasks matching the given category|*Length: 1-15*|
-|`-C, --completed`|show all tasks with the given completed status|*Options:* `true / fasle`|
-|`-e, --expire`|show all tasks with the given expire status|*Options:* `true / false`|
+|`-C, --completed`|show tasks by completed status|*Options:* `true / fasle`|
+|`-e, --expire`|show tasks by expire status|*Options:* `true / false`|
 
 ### Update
 #### `upt <search-flag> <search-value> <update-flag> <new-value>`
