@@ -119,8 +119,11 @@ void idCheck(const string *value){
 
 // --due checker
 void dueCheck(const string *value){
+    if(value->length() != 19){
+        throw invalid_argument("invalid format: \'" + *value + "\' \nFormat: YYYY-MM-DD@hr:min:sec");
+    }
     if(value->at(4) != '-' || value->at(7) != '-' || value->at(10) != '@' 
-        || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
+        || value->at(13) != ':' || value->at(16) != ':'){
         throw invalid_argument("invalid format: \'" + *value + "\' \nFormat: YYYY-MM-DD@hr:min:sec");
     }
     // check 0 ~ 9
