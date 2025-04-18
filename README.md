@@ -36,9 +36,9 @@ Commands
 |:----------|:---------------|:---------------------|
 |`-i, --id`|delete the task by selected id|*Type: Integer*|
 |`-n, --name`|delete the task matching the given name|*Length: 1-15*|
-|`-c, --category`|delete all the tasks matching the given category|*Length: 1-15*|
-|`-C, --completed`|delete all the tasks matching the given completed status|*Options:* `true / false`|
-|`-e, --expire`|delete all the tasks matching the given expire status|*Options:* `true / false`|
+|`-c, --category`|delete tasks matching the given category|*Length: 1-15*|
+|`-C, --completed`|delete tasks matching the given completed status|*Options:* `true / false`|
+|`-e, --expire`|delete tasks matching the given expire status|*Options:* `true / false`|
 
 ### Others
 #### `help` , `exit/quit`
@@ -51,13 +51,14 @@ Logic
 graph LR
 A(main) --send processed input--> B(router)
 B --send to different entry--> C(database)
-D(validator) --checks validity--> A
+D(validator) --check validity--> A
 E(input) --user input--> A
 ```
 
 Some Features 
 ---
-*Note: Both features are available on UNIX and windows system*
+*Note: All features should work well on both UNIX and windows system*  
+*Tested on Fedora 41 (kernel 6.13.11, gnome 47.5), windows 11*
 - Navigate command history using the `Up` and `Down` arrow keys  
 - Move the cursor using the `Left` and `Right` arrow keys
 - Data can be `Save` and `Load` from .txt file
@@ -65,8 +66,8 @@ Some Features
 
 Thanks
 ---
-- *My roomate and ChatGPT's inspiring ideas*
-- *TAs' Q&A fourm*
+- *My friends' and ChatGPT's inspiring ideas*
+- *TAs' Q&A forum*
 
 
 
