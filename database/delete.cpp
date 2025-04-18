@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// delete
 void Database::deleteById(int *id){
 
     auto itr = db->begin()+*id;
@@ -25,6 +24,7 @@ void Database::deleteById(int *id){
         cout << error.what() << "\n";
     }
 }
+
 void Database::deleteByName(string *name){
 
     auto itr = searchByName(name);
@@ -45,6 +45,7 @@ void Database::deleteByName(string *name){
         cout << error.what() << "\n";
     }
 }
+
 void Database::deleteByCategory(string *category){
 
     auto itrPair = searchByCategory(category);
@@ -67,6 +68,7 @@ void Database::deleteByCategory(string *category){
         cout << error.what() << "\n";
     }
 }
+
 void Database::deleteByCompleted(bool *completed){
 
     string *status = new string("false");
@@ -97,6 +99,7 @@ void Database::deleteByCompleted(bool *completed){
     delete status;
     status = nullptr;
 }
+
 void Database::deleteByExpire(int *expire){
 
     string *status = new string("false");

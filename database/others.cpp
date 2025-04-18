@@ -161,7 +161,7 @@ void Database::loadFromFile(string *file){
 void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator start, vector<Task*>::iterator end){
     cout << "+------------------------------------------------------------------------------------------+\n"
          << "|  id              name          category      completed             expire(day/hr/min/sec)|\n"
-         << "+------------------------------------------------------------------------------------------+\n";
+         << "+==========================================================================================+\n";
     for(auto itr = start; itr != end; itr++){
         cout << "|" << setw(4) << (itr-begin);
         (*itr)->showTask();
@@ -173,7 +173,7 @@ void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator s
 void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator itr){
     cout << "+------------------------------------------------------------------------------------------+\n"
          << "|  id              name          category      completed             expire(day/hr/min/sec)|\n"
-         << "+------------------------------------------------------------------------------------------+\n";
+         << "+==========================================================================================+\n";
     cout << "|" << setw(4) << (itr-begin);
     (*itr)->showTask();
     cout << "|\n";

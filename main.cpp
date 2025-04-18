@@ -113,7 +113,7 @@ void decodeBuffer(string *buffer, deque<string> *command, stringstream *ss, stri
 }
 
 void showHelpMenu(){
-    cout << "<-----------------------------------HELP MENU---------------------------------->\n";
+    cout << "+---------------------------------<-HELP-MENU->--------------------------------+\n";
     cout << "| add <flag1> <value1> <flag2> <value2>...                                     |\n"
          << "|    -n, --name              set the task name                                 |\n"
          << "|    -c, --category          set the task category                             |\n"
@@ -141,5 +141,5 @@ void showHelpMenu(){
          << "|    -c, --category          delete tasks matching the given category          |\n"
          << "|    -C, --completed         delete tasks matching the given completed status  |\n"
          << "|    -e, --expire            delete tasks matching the given expire status     |\n";
-    cout << "<------------------------------------------------------------------------------>\n";
+    cout << "+------------------------------------------------------------------------------+\n";
 }

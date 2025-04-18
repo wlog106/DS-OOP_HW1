@@ -88,18 +88,21 @@ bool valueCheck(const string *flag, const string *value){
 }
 
 
+// --all checker
 void allCheck(const string *value){
     if(*value != "name" && *value != "category" && *value != "completed" && *value != "expire"){
         throw invalid_argument("invalid sort criteria");
     }
 }
 
+// --name, --category checker
 void nameNcategoryCheck(const string *value){
     if(value->length() > 15 || value->length() == 0){
         throw invalid_argument("Length should be between 1 and 15");
     }
 }
 
+// --id checker
 void idCheck(const string *value){
     int *i = new int;
     for(*i = 0; *i < value->length(); (*i)++){
@@ -113,6 +116,8 @@ void idCheck(const string *value){
     i = nullptr;
 }
 
+
+// --due checker
 void dueCheck(const string *value){
     if(value->at(4) != '-' || value->at(7) != '-' || value->at(10) != '@' 
         || value->at(13) != ':' || value->at(16) != ':' || value->length() != 19){
@@ -163,12 +168,14 @@ void dueCheck(const string *value){
     day = nullptr;
 }
 
+// --completed checker
 void completedStatusCheck(const string *value){
     if(*value != "true" && *value != "false"){
         throw invalid_argument("invalid completed status, status should be true/false");
     }
 }
 
+// --expire checker
 void expireStatusCheck(const string *value){
     if(*value != "true" && *value != "false"){
         throw invalid_argument("invalid expire status, status should be true/false");

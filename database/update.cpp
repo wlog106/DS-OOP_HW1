@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// update
 void Database::updateNameById(int *id, string *name){
     try{
         if(db->begin()+*id >= db->end()) throw logic_error("Task with Id: \'" + to_string(*id) + "\' Not Found");
