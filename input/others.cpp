@@ -10,6 +10,7 @@
 
 using namespace std;
 
+// copy history into buffer
 void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
     Buffer->clear();
     int *i = new int;
@@ -20,10 +21,11 @@ void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
     i = nullptr;
 }
 
+// render new buffer
 void render(const vector<char> *Buffer, const vector<char>::iterator BufferItr){
     int *i = new int;
     cout << "\r";
-    for(*i = 0; *i < 75; (*i)++){
+    for(*i = 0; *i < 100; (*i)++){
         cout << " ";
     }
     cout << "\r";

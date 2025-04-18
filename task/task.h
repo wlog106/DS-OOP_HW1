@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 
-#define expireStatus_None 4
+#define expireStatus_None 6
 #define expireStatus_True 5
-#define expireStatus_False 6
+#define expireStatus_False 4
 
 using namespace std;
 

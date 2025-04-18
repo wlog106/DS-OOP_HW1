@@ -6,6 +6,7 @@
 using namespace std;
 
 void router(Database *db, deque<string> *command){
+    // route to different router
     if(command->front() == "add"){
         command->pop_front();
         Create(db, command);    

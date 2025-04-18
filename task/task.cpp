@@ -73,6 +73,7 @@ Task::~Task(){
     expireTime = nullptr;
 }
 
+// for create
 void Task::setDue(string *due){
     tm *dueTime = new tm{0};
     dueTime->tm_year = stoi(due->substr(0, 4))-1900;
@@ -87,6 +88,7 @@ void Task::setDue(string *due){
     due = nullptr;
 }
 
+// for loading data
 void Task::setDue(time_t *t){
     expireTime = t;
     *expire = difftime(*expireTime, time(NULL)) < 0 ? expireStatus_True : expireStatus_False;
