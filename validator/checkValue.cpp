@@ -141,7 +141,6 @@ void dueCheck(const string *value){
         || static_cast<int>(value->at(11)) < 48 || static_cast<int>(value->at(12)) < 48
         || static_cast<int>(value->at(14)) < 48 || static_cast<int>(value->at(15)) < 48
         || static_cast<int>(value->at(17)) < 48 || static_cast<int>(value->at(18)) < 48){
-            cout << value->at(0) << "\n";
             throw invalid_argument("fail to convert " + *value + " to proper format");
     }
     // check hr, min, sec
