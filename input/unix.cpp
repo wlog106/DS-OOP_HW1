@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
-#include <cstdlib>
 
 #include <iostream>
 #include <vector>
