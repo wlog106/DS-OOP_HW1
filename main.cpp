@@ -119,7 +119,7 @@ void showHelpMenu(){
          << "|    -n, --name              set the task name                                              |\n"
          << "|    -c, --category          set the task category                                          |\n"
          << "|    -C, --completed         set task as completed status (optional) (default=false)        |\n"
-         << "|    -d, --due               set a due for the task (optional)                              |\n"
+         << "|    -d, --due               set a due for the task (optional) (YYYY-MM-DD@hr:min:sec)      |\n"
          << "|                                                                                           |\n"
          << "| ls <flag> <value>                                                                         |\n"
          << "|    -a, --all               show tasks by selected criteria                                |\n"
