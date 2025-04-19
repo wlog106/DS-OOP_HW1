@@ -45,15 +45,15 @@ Commands
 - Use `help` to show HELP MENU
 - Use `exit/quit` to terminate the TodoList
 
-Logic
+Main Logic
 ---
 ```mermaid
 graph LR
-A(main) --send processed input--> B(router)
-B --send to different entries--> C(database)
-D(validator) --command's validity--> A
+A(main) --valid command--> B(router)
+B --choose different entries--> C(database)
+D(validator) --validity--> A
 E(input) --user input--> A
-A --send input command--> E
+A --input command--> D
 ```
 
 Some Features 
