@@ -50,9 +50,10 @@ Logic
 ```mermaid
 graph LR
 A(main) --send processed input--> B(router)
-B --send to different entry--> C(database)
-D(validator) --check validity--> A
+B --send to different entries--> C(database)
+D(validator) --command's validity--> A
 E(input) --user input--> A
+A --send input command--> E
 ```
 
 Some Features 

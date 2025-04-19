@@ -21,19 +21,23 @@ void unixCommandLine(string *buffer, deque<string> *History){
     auto HistoryItr = History->end();
     system("/bin/stty raw");
     while(*ch = getchar()){
+        // 27 + 91 +(65~68) = arrow key
         if(*ch == 27){
             *ch = getchar();
+            if(*ch != 91){
+                render(Buffer, BufferItr);
+                continue;
+            }
             *ch = getchar();
-            // arrow key
+            // Key Up
             if(*ch == 65){
-                // Key Up
                 if(HistoryItr != History->begin()){
                     setCommand(Buffer, --HistoryItr);
                     BufferItr = Buffer->end();
                 }
             }
+            // Key Down
             else if(*ch == 66){
-                // Key Down
                 if(HistoryItr != History->end()){
                     setCommand(Buffer, ++HistoryItr);
                     BufferItr = Buffer->end();
@@ -65,11 +69,12 @@ void unixCommandLine(string *buffer, deque<string> *History){
             cout << "\b \b\n";
             break;
         }
-        // printable chars
+        // printable chars\{backspace}
         else if(*ch >= 32 && *ch <= 126) {
             BufferItr = Buffer->insert(BufferItr, static_cast<char>(*ch));
             BufferItr++;
         }
+        // render when every single char is input
         render(Buffer, BufferItr);
     }
     for(auto itr = Buffer->begin(); itr != Buffer->end(); itr++){
