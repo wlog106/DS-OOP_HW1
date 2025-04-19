@@ -25,7 +25,7 @@ void setCommand(vector<char> *Buffer, deque<string>::iterator HistoryItr){
 void render(const vector<char> *Buffer, const vector<char>::iterator BufferItr){
     int *i = new int;
     cout << "\r";
-    for(*i = 0; *i < 100; (*i)++){
+    for(*i = 0; *i < 110; (*i)++){
         cout << " ";
     }
     cout << "\r";

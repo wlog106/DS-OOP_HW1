@@ -21,7 +21,6 @@ using namespace std;
 void decodeBuffer(string *buffer, deque<string> *commmand, stringstream *ss, string* str);
 void showHelpMenu();
 
-
 int main(){
     
     string *str = new string;
