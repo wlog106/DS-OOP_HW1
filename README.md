@@ -67,10 +67,9 @@ Some Features
 
 Known issue
 ---
+- **The issue isn’t been solved so please make sure the width of your terminal is bigger than 110 spaces.**<br><br>
 Since every time you input a char, `render()` is called.<br>
-It would using 110 spaces to overwrite what ever is rendered last time *--110 is close to maximum possible input length.* <br>
-However, if your terminal’s width is less than 110 spaces, every time when `render()` is called, the result would look like a `\n` is output.<br>
-**The issue isn’t been solved so please make sure the width of your terminal is bigger than 110 spaces.**
+It would using 110 spaces to overwrite what ever is rendered last time *--110 is close to maximum possible input length.* However, if your terminal’s width is less than 110 spaces, every time when `render()` is called, the result would look like a `\n` is output.<br>
 
 Thanks
 ---
