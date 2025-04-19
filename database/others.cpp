@@ -167,6 +167,8 @@ void Database::printDB (vector<Task*>::iterator begin, vector<Task*>::iterator s
         (*itr)->showTask();
         cout << "|\n";
     }
+    if(start == end) 
+    cout << "|                                                                                          |\n";
     cout << "+------------------------------------------------------------------------------------------+\n";
 }
 
